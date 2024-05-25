@@ -25,6 +25,7 @@ import com.wymarc.astrolabe.generator.printengines.postscript.extras.horary.Adva
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.horary.EqualHours;
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.horary.BasicHoraryQuadrant;
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.horary.QuadransVetus;
+import com.wymarc.astrolabe.generator.printengines.postscript.extras.laserFiles.LatitudeRing;
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.laserFiles.VernierSineQuadrantLaser;
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.laserFiles.ZodiacSineQuadrantLaser;
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.sine.VernierSineQuadrant;
@@ -136,6 +137,13 @@ public class EPSPrintEngine {
             component.add(basicHoraryQuad.printQuadrant());
             selectedComponents.add(component);
         }
+//        if (GeneratorGui.MY_ASTROLABE.getPrintAdvancedHoraryQuadrant()){
+//            LatitudeRing latitudeRing = new LatitudeRing();
+//            component = new ArrayList<>();
+//            component.add("latitudeRing.eps");
+//            component.add(latitudeRing.create(GeneratorGui.MY_ASTROLABE));
+//            selectedComponents.add(component);
+//        }
         if (GeneratorGui.MY_ASTROLABE.getPrintAdvancedHoraryQuadrant()){
             QuadransVetus quadransVetus = new QuadransVetus();
             component = new ArrayList<>();

@@ -29,7 +29,7 @@ import java.awt.geom.Point2D;
 public class UniversalPrintEngine {
 
     private Astrolabe myAstrolabe = new Astrolabe();
-    private boolean forCAD = false; // Each layer a separate color for using with CAD/cutting software
+    private boolean forCAD = true; // Each layer a separate color for using with CAD/cutting software
 
     /**
      * Draws the plate and its lines
@@ -117,9 +117,14 @@ public class UniversalPrintEngine {
         // Where y is the y-axis position of the center, r is the radius of the circle,
         // R is the radius of the plate and a is the latitude angle
 
-        // First clear poles above 86 degrees for neatness
-        double y = myAstrolabe.getUniversalLimbRadius()/Math.sin(Math.toRadians(86));
-        double r = myAstrolabe.getUniversalLimbRadius()/Math.tan(Math.toRadians(86));
+        // First clear poles for neatness
+        int highestLat= 86;
+        if (forCAD){
+            highestLat = 85;
+        }
+        double y = myAstrolabe.getUniversalLimbRadius()/Math.sin(Math.toRadians(highestLat));
+        double r = myAstrolabe.getUniversalLimbRadius()/Math.tan(Math.toRadians(highestLat));
+
         out += "\n" + "1 setgray";
         out += "\n" + "0 " + y + " " + r + " 0 360 arc fill";
         if (!isRete) {
@@ -127,10 +132,16 @@ public class UniversalPrintEngine {
         }
         out += "\n" + "0 setgray";
 
+        int interval = 2;
+        int limit = 44;
+        if (forCAD){
+            interval = 5;
+            limit = 17;
+        }
 
-        for (int count = 1; count <= 44; count++){
-            y = myAstrolabe.getUniversalLimbRadius()/Math.sin(Math.toRadians(count*2));
-            r = myAstrolabe.getUniversalLimbRadius()/Math.tan(Math.toRadians(count*2));
+        for (int count = 1; count <= limit; count++){
+            y = myAstrolabe.getUniversalLimbRadius()/Math.sin(Math.toRadians(count*interval));
+            r = myAstrolabe.getUniversalLimbRadius()/Math.tan(Math.toRadians(count*interval));
 
             InterSect interSect1 = new InterSect(0, y, r, 0, 0, myAstrolabe.getUniversalLimbRadius());
             double angle11 = interSect1.getAngle1();

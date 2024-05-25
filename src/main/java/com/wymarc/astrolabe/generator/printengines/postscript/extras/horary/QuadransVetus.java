@@ -68,7 +68,7 @@ public class QuadransVetus {
                 .append("\n").append("0 0 489 270 360 arc stroke")
                 .append("\n").append("0 0 460 270 360 arc stroke")
                 .append("\n").append("0 0 455 270 360 arc stroke")
-                .append("\n").append("");
+                .append("\n");
 
         // create 1 degree marks
         for (int count = 0; count <= 89; count++) {
@@ -105,17 +105,29 @@ public class QuadransVetus {
     private String drawTick(double alt, int start, int end, String text) {
         StringBuilder out = new StringBuilder();
 
+        if (isLaser){
+            out.append("\n").append("0 0 1 setrgbcolor");
+        }
+
         out.append("\n").append(alt).append(" rotate")
                 .append("\n").append("0 ").append(start).append(" moveto")
                 .append("\n").append("0 ").append(end).append(" lineto stroke")
                 .append("\n").append(-alt).append(" rotate");
+
+        if (isLaser){
+            out.append("\n").append("0 setgray");
+        }
+
         if (!text.equals("")) {
-            out.append("\n").append("NormalFont8 setfont");
-            double test = alt + 180;
-            if (end == 438) {
-                out.append(EPSToolKit.drawInsideCircularText(text, 8, -89.4 + test, 430));
-            } else if (start == 440) {
-                out.append(EPSToolKit.drawInsideCircularText(text, 8, -90.6 + test, 453));
+            if (isLaser){
+                out.append("\n").append("ArialFont10 setfont");
+            }else{
+                out.append("\n").append("NormalFont10 setfont");
+            }
+            if (end == 390) {
+                out.append(EPSToolKit.drawInsideCircularText(text, 10, alt + 90, 403));
+            } else if (start == 435) {
+                out.append(EPSToolKit.drawOutsideCircularText(text, 10, alt + 90, 421));
             }
         }
         return out.toString();
@@ -129,9 +141,9 @@ public class QuadransVetus {
 
         // draw arcs
         out.append("\n").append("% Space for calendar")
-                .append("\n").append("0 0 343 270 360 arc stroke")
-                .append("\n").append("0 0 338 270 360 arc stroke")
-                .append("\n").append("");
+                .append("\n").append("0 0 370 270 360 arc stroke")
+                .append("\n").append("0 0 365 270 360 arc stroke")
+                .append("\n");
 
         if (isLaser){
             out.append("\n").append("0 setgray");
@@ -144,198 +156,219 @@ public class QuadransVetus {
         out.append("\n").append("% Calendar scale");
 
         alt = AstroMath.solarNoonAltitude(11, 22, year, lat);
-        out.append(drawTick(alt - 183, 423, 455, ""));
+        out.append(drawTick(alt - 183, 370, 455, ""));
+        out.append(drawTick(alt - 184, 370, 455, ""));
         double lowAngle = (alt - 3) + 270;
+
         alt = AstroMath.solarNoonAltitude(5, 21, year, lat);
-        out.append(drawTick(alt - 177, 423, 455, ""));
+        out.append(drawTick(alt - 177, 370, 455, ""));
+        out.append(drawTick(alt - 176, 370, 455, ""));
         double highAngle = (alt + 3) + 270;
-        //343 - 455
-        out.append("\n").append("0 0 343 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
-                .append("\n").append("0 0 433 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
-                .append("\n").append("0 0 438 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
-                .append("\n").append("0 0 440 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
-                .append("\n").append("0 0 445 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
-                .append("\n").append("0 0 455 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke");
 
-//        out.append("\n").append("0 0 423 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
-//                .append("\n").append("0 0 433 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
-//                .append("\n").append("0 0 438 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
-//                .append("\n").append("0 0 440 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
-//                .append("\n").append("0 0 445 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
-//                .append("\n").append("0 0 455 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke");
+        if (isLaser){
+            out.append("\n").append("0 0 1 setrgbcolor");
+        }
 
+        out.append("\n").append("\n").append("0 0 390 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
+                .append("\n").append("0 0 410 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
+                .append("\n").append("0 0 415 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
+                .append("\n").append("0 0 435 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke");
+        //If printing the calendar separately
+//        out.append("\n").append("0 0 370 ").append(lowAngle - 1).append(" ").append(highAngle + 1).append(" arc stroke")
+//                .append("\n").append("0 0 390 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
+//                .append("\n").append("0 0 410 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
+//                .append("\n").append("0 0 415 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
+//                .append("\n").append("0 0 435 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
+//                .append("\n").append("0 0 455 ").append(lowAngle - 1).append(" ").append(highAngle + 1).append(" arc stroke");
+
+        if (isLaser){
+            out.append("\n").append("0 setgray");
+        }
+
+        //january
         alt = AstroMath.solarNoonAltitude(0, 1, year, lat) - 180;
-        out.append(drawTick(alt, 423, 438, "J"));
+        out.append(drawTick(alt, 370, 410, ""));
         alt = AstroMath.solarNoonAltitude(0, 5, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(0, 10, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
         alt = AstroMath.solarNoonAltitude(0, 15, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(0, 20, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, "January"));
         alt = AstroMath.solarNoonAltitude(0, 25, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(0, 30, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
 
+        //february
         alt = AstroMath.solarNoonAltitude(1, 1, year, lat) - 180;
-        out.append(drawTick(alt, 423, 438, "F"));
+        out.append(drawTick(alt, 370, 410, ""));
         alt = AstroMath.solarNoonAltitude(1, 5, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(1, 10, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
         alt = AstroMath.solarNoonAltitude(1, 15, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, "February"));
         alt = AstroMath.solarNoonAltitude(1, 20, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
         alt = AstroMath.solarNoonAltitude(1, 25, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
 
+        //mafrch
         alt = AstroMath.solarNoonAltitude(2, 1, year, lat) - 180;
-        out.append(drawTick(alt, 423, 438, "M"));
+        out.append(drawTick(alt, 370, 410, ""));
         alt = AstroMath.solarNoonAltitude(2, 5, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(2, 10, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
         alt = AstroMath.solarNoonAltitude(2, 15, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, "March"));
         alt = AstroMath.solarNoonAltitude(2, 20, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
         alt = AstroMath.solarNoonAltitude(2, 25, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(2, 30, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
 
-
+        //april
         alt = AstroMath.solarNoonAltitude(3, 1, year, lat) - 180;
-        out.append(drawTick(alt, 423, 438, "A"));
+        out.append(drawTick(alt, 370, 410, ""));
         alt = AstroMath.solarNoonAltitude(3, 5, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(3, 10, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
         alt = AstroMath.solarNoonAltitude(3, 15, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, "April"));
         alt = AstroMath.solarNoonAltitude(3, 20, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
         alt = AstroMath.solarNoonAltitude(3, 25, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
 
+        //may
         alt = AstroMath.solarNoonAltitude(4, 1, year, lat) - 180;
-        out.append(drawTick(alt, 423, 438, "M"));
+        out.append(drawTick(alt, 370, 410, ""));
         alt = AstroMath.solarNoonAltitude(4, 5, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(4, 10, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
         alt = AstroMath.solarNoonAltitude(4, 15, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, "May"));
         alt = AstroMath.solarNoonAltitude(4, 20, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
         alt = AstroMath.solarNoonAltitude(4, 25, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(4, 30, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
 
-
+        //june
         alt = AstroMath.solarNoonAltitude(5, 1, year, lat) - 180;
-        out.append(drawTick(alt, 423, 438, "J"));
+        out.append(drawTick(alt, 370, 410, "Ju"));
         alt = AstroMath.solarNoonAltitude(5, 5, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(5, 10, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
         alt = AstroMath.solarNoonAltitude(5, 15, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(5, 20, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, "Jun"));
+
+        //reverse
         alt = AstroMath.solarNoonAltitude(5, 25, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
 
-
+        //july
         alt = AstroMath.solarNoonAltitude(6, 1, year, lat) - 180;
-        out.append(drawTick(alt, 440, 455, "J"));
+        out.append(drawTick(alt, 415, 455, ""));
         alt = AstroMath.solarNoonAltitude(6, 5, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(6, 10, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
         alt = AstroMath.solarNoonAltitude(6, 15, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(6, 20, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, "July"));
         alt = AstroMath.solarNoonAltitude(6, 25, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(6, 30, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
 
+        //august
         alt = AstroMath.solarNoonAltitude(7, 1, year, lat) - 180;
-        out.append(drawTick(alt, 440, 455, "A"));
+        out.append(drawTick(alt, 415, 455, ""));
         alt = AstroMath.solarNoonAltitude(7, 5, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(7, 10, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
         alt = AstroMath.solarNoonAltitude(7, 15, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, "August"));
         alt = AstroMath.solarNoonAltitude(7, 20, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
         alt = AstroMath.solarNoonAltitude(7, 25, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(7, 30, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
 
+        //september
         alt = AstroMath.solarNoonAltitude(8, 1, year, lat) - 180;
-        out.append(drawTick(alt, 440, 455, "S"));
+        out.append(drawTick(alt, 415, 455, ""));
         alt = AstroMath.solarNoonAltitude(8, 5, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(8, 10, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
         alt = AstroMath.solarNoonAltitude(8, 15, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, "September"));
         alt = AstroMath.solarNoonAltitude(8, 20, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
         alt = AstroMath.solarNoonAltitude(8, 25, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
 
+        //october
         alt = AstroMath.solarNoonAltitude(9, 1, year, lat) - 180;
-        out.append(drawTick(alt, 440, 455, "O"));
+        out.append(drawTick(alt, 415, 455, ""));
         alt = AstroMath.solarNoonAltitude(9, 5, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(9, 10, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
         alt = AstroMath.solarNoonAltitude(9, 15, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, "October"));
         alt = AstroMath.solarNoonAltitude(9, 20, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
         alt = AstroMath.solarNoonAltitude(9, 25, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(9, 30, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
 
+        //november
         alt = AstroMath.solarNoonAltitude(10, 1, year, lat) - 180;
-        out.append(drawTick(alt, 440, 455, "N"));
+        out.append(drawTick(alt, 415, 455, ""));
         alt = AstroMath.solarNoonAltitude(10, 5, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(10, 10, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
         alt = AstroMath.solarNoonAltitude(10, 15, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, "November"));
         alt = AstroMath.solarNoonAltitude(10, 20, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
         alt = AstroMath.solarNoonAltitude(10, 25, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
 
+        //december
         alt = AstroMath.solarNoonAltitude(11, 1, year, lat) - 180;
-        out.append(drawTick(alt, 440, 455, "D"));
+        out.append(drawTick(alt, 415, 455, ""));
         alt = AstroMath.solarNoonAltitude(11, 5, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(11, 10, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, ""));
         alt = AstroMath.solarNoonAltitude(11, 15, year, lat) - 180;
-        out.append(drawTick(alt, 440, 445, ""));
+        out.append(drawTick(alt, 435, 440, ""));
         alt = AstroMath.solarNoonAltitude(11, 20, year, lat) - 180;
-        out.append(drawTick(alt, 440, 449, ""));
+        out.append(drawTick(alt, 435, 444, "Dec"));
+        //reverse
         alt = AstroMath.solarNoonAltitude(11, 25, year, lat) - 180;
-        out.append(drawTick(alt, 433, 438, ""));
+        out.append(drawTick(alt, 385, 390, ""));
         alt = AstroMath.solarNoonAltitude(11, 30, year, lat) - 180;
-        out.append(drawTick(alt, 429, 438, ""));
+        out.append(drawTick(alt, 381, 390, ""));
 
 
 
@@ -349,7 +382,7 @@ public class QuadransVetus {
      */
     private String drawShadowSquare() {
         //compute size of box
-        double shadowRadius = 338.0;
+        double shadowRadius = 365.0;
         double shadowSide = Math.sqrt((shadowRadius * shadowRadius) / 2.0); //from pythagoras
         double div = 12.0;
         StringBuilder out = new StringBuilder();
@@ -454,8 +487,8 @@ public class QuadransVetus {
 
         double radius;
         for (int count = 1; count <= 6; count++) {
-            radius = (338 / (2 * (Math.sin(Math.toRadians(15 * count)))));
-            InterSect interSect1 = new InterSect(radius, 0.0, radius, 0.0, 0.0, 338.0);
+            radius = (365.0 / (2 * (Math.sin(Math.toRadians(15 * count)))));
+            InterSect interSect1 = new InterSect(radius, 0.0, radius, 0.0, 0.0, 365.0);
             double angle2 = interSect1.getAngle2();
             out.append("\n").append(radius).append(" 0 ").append(radius).append(" 180 ").append(angle2).append(" arc stroke");
         }
@@ -467,23 +500,23 @@ public class QuadransVetus {
         //Mark unequal hours
         //Mark degrees
         if (isLaser){
-            out.append("\n").append("ArialFont16 setfont");
+            out.append("\n").append("ArialFont12 setfont");
         }else{
-            out.append("\n").append("NormalFont16 setfont");
+            out.append("\n").append("NormalFont12 setfont");
         }
 
-        out.append(EPSToolKit.drawInsideCircularText("12", 16, (-88), 335));
-        out.append(EPSToolKit.drawInsideCircularText("1", 16, (-77), 335));
-        out.append(EPSToolKit.drawInsideCircularText("11", 16, (-73), 335));
-        out.append(EPSToolKit.drawInsideCircularText("2", 16, (-62.5), 335));
-        out.append(EPSToolKit.drawInsideCircularText("10", 16, (-58.5), 335));
-        out.append(EPSToolKit.drawInsideCircularText("3", 16, (-48.5), 335));
-        out.append(EPSToolKit.drawInsideCircularText("9", 16, (-41.5), 335));
-        out.append(EPSToolKit.drawInsideCircularText("4", 16, (-35), 335));
-        out.append(EPSToolKit.drawInsideCircularText("8", 16, (-28.5), 335));
-        out.append(EPSToolKit.drawInsideCircularText("5", 16, (-23.5), 335));
-        out.append(EPSToolKit.drawInsideCircularText("6", 16, (-1), 335));
-        out.append(EPSToolKit.drawInsideCircularText("7", 16, (-14.5), 335));
+        out.append(EPSToolKit.drawInsideCircularText("12", 12, (-88), 360));
+        out.append(EPSToolKit.drawInsideCircularText("1", 12, (-77), 360));
+        out.append(EPSToolKit.drawInsideCircularText("11", 12, (-73), 360));
+        out.append(EPSToolKit.drawInsideCircularText("2", 12, (-62.5), 360));
+        out.append(EPSToolKit.drawInsideCircularText("10", 12, (-58.5), 360));
+        out.append(EPSToolKit.drawInsideCircularText("3", 12, (-48.5), 360));
+        out.append(EPSToolKit.drawInsideCircularText("9", 12, (-41.5), 360));
+        out.append(EPSToolKit.drawInsideCircularText("4", 12, (-35), 360));
+        out.append(EPSToolKit.drawInsideCircularText("8", 12, (-28.5), 360));
+        out.append(EPSToolKit.drawInsideCircularText("5", 12, (-23.5), 360));
+        out.append(EPSToolKit.drawInsideCircularText("6", 12, (-1), 360));
+        out.append(EPSToolKit.drawInsideCircularText("7", 12, (-14.5), 360));
 
         return out.toString();
     }
@@ -502,15 +535,15 @@ public class QuadransVetus {
                 .append("\n").append("mark")
                 .append("\n").append("/Quadrant 10 dict def %local variable dictionary")
                 .append("\n").append("Quadrant begin")
-                .append("\n").append("")
+                .append("\n")
                 .append("\n").append("%% setup")
-                .append(EPSToolKit.fillBackground())
+                //.append(EPSToolKit.fillBackground())
                 .append("\n").append("72 630 translate")
                 .append("\n").append(".4 setlinewidth")
-                .append("\n").append("")
+                .append("\n")
                 .append(EPSToolKit.setUpFonts())
                 .append(EPSToolKit.setUpCircularText())
-                .append("\n").append("")
+                .append("\n")
                 .append("\n").append("gsave")
                 .append(drawDegreeScale())
                 .append("\n").append("grestore")
