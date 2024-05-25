@@ -118,7 +118,7 @@ public class BackPrintEngine {
 
         for (count = 0; count <= 11; count++){
             out += EPSToolKit.drawOutsideCircularText(Astrolabe.MONTHS[count], 10,
-                    (((totalDays + (Astrolabe.MONTHSDAYS[count] / 2)) * increment)), (calendarRadius - 18));
+                    (((totalDays + (Astrolabe.MONTHSDAYS[count] / 2.0)) * increment)), (calendarRadius - 18));
             totalDays += Astrolabe.MONTHSDAYS[count];
         }
         out += "\n" + "NormalFont5 setfont";  // label tens of days
@@ -217,7 +217,7 @@ public class BackPrintEngine {
         totalDays = 0;
 
         for (count = 0; count <= 11; count++){
-            double rotation = AstroMath.geolong(t + ((totalDays + (Astrolabe.MONTHSDAYS[count] / 2)) * jDay));
+            double rotation = AstroMath.geolong(t + ((totalDays + (Astrolabe.MONTHSDAYS[count] / 2.0)) * jDay));
             out += EPSToolKit.drawOutsideCircularText(Astrolabe.MONTHS[count], 10,
                     rotation, (calendarRadius - 18));
             totalDays += Astrolabe.MONTHSDAYS[count];
@@ -964,7 +964,7 @@ public class BackPrintEngine {
 
         out += "\n" + "0 setgray";
         out += "\n" + "%% ==================== End Create Back ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -1021,7 +1021,7 @@ public class BackPrintEngine {
 
         out += "\n" + "NormalFont7 setfont";
 
-        if((owner.length() > 0)&&(!owner.equals("Your Name"))){
+        if((!owner.isEmpty())&&(!owner.equals("Your Name"))){
             out += "\n" + "0 " + -ownerPos + " moveto";
             out += EPSToolKit.centerText(owner);
         }
@@ -1035,7 +1035,7 @@ public class BackPrintEngine {
         out += "\n" + "0 " + -lonLabelPos + " moveto";
         out += EPSToolKit.centerText(longitudeLabel);
 
-        if(local.length() > 0){
+        if(!local.isEmpty()){
             out += "\n" + "0 " + -localPos + " moveto";
             out += EPSToolKit.centerText(local);
         }
@@ -1045,8 +1045,8 @@ public class BackPrintEngine {
 
     public String drawEOT(){
         StringBuilder out = new StringBuilder();
-        Double outerRadius = myAstrolabe.getMaterRadius() - 80;
-        Double innerRadius = outerRadius/4.0;
+        double outerRadius = myAstrolabe.getMaterRadius() - 80;
+        double innerRadius = outerRadius/4.0;
 
         ArrayList<Point2D> points = AstroMath.equationOfTimePoints(innerRadius, outerRadius);
 
@@ -1131,7 +1131,7 @@ public class BackPrintEngine {
                 out += EPSToolKit.buildMaterThrone(myAstrolabe);
             }
             out += "\n" + "grestore";
-            out += "\n" + "";
+            out += "\n";
             if (isLaser){
                 out += "\n" + "gsave";
                 out += "\n" + "1 0 0 setrgbcolor";
@@ -1149,7 +1149,7 @@ public class BackPrintEngine {
         out += "\n" + "gsave";
         out += buildBackLimb();
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "gsave";
 
         if(myAstrolabe.getShowConcentricCalendar()){
@@ -1159,7 +1159,7 @@ public class BackPrintEngine {
         }
 
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         //print third and fourth quadrant
         out += "\n" + "gsave";
@@ -1226,7 +1226,7 @@ public class BackPrintEngine {
             out += "\n" + "0 5 moveto";
             out += "\n" + "0 -5 lineto stroke";
         }
-        out += "\n" + "";
+        out += "\n";
 
         // Write Footer 
         out += "\n" + "% Eject the page";

@@ -39,6 +39,8 @@ import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.MediaSizeName;
 import javax.swing.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipOutputStream;
@@ -47,7 +49,6 @@ public class EPSPrintEngine {
 
     /**
      * Assemble a List of the selected components for output
-     *
      * Data is returned in the form of a nested list:
      * 1. 1. Name of component 1
      *    2. EPS data for 1
@@ -307,7 +308,7 @@ public class EPSPrintEngine {
         String filePath = FileHandler.getSavePath();
 
         // verify the filepath and the Astrolabe Object
-        Boolean noProblems = filePath != null && GeneratorGui.MY_ASTROLABE != null ;
+        boolean noProblems = filePath != null && GeneratorGui.MY_ASTROLABE != null ;
 		if (noProblems){
             List<List<String>> components = getComponents();
 
@@ -332,12 +333,12 @@ public class EPSPrintEngine {
         String filePath = FileHandler.getSavePath();
 
         // verify the filepath and the Astrolabe Object
-        Boolean noProblems = filePath != null && GeneratorGui.MY_ASTROLABE != null ;
+        boolean noProblems = filePath != null && GeneratorGui.MY_ASTROLABE != null ;
         if (noProblems){
             filePath = filePath + "/astrolabe.zip";
             List<List<String>> components = getComponents();
             try {
-                ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(filePath));
+                ZipOutputStream zos = new ZipOutputStream(Files.newOutputStream(Paths.get(filePath)));
                 for (List<String> component : components){
                     FileHandler.updateZip(component.get(0), zos, component.get(1));
                 }

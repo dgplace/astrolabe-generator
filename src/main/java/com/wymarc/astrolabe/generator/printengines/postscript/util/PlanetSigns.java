@@ -24,9 +24,7 @@ import java.awt.geom.Point2D;
 /**
  * This file contains tools for working with EPS
  * (Encapsulated PostScript)
- *
  * author    Timothy J. Mitchell <wymarc@gmail.com>
- *
  * Usage:
  * -- rotate the document to the desired angle
  * -- Call the planet as follows:

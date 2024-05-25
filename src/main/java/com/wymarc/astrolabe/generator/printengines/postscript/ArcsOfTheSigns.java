@@ -44,12 +44,12 @@ public class ArcsOfTheSigns {
 		//Compute Sun's altitude when it is at that azimuth
 		// Too complicated to discuss here. See Morrison[141,142]
 		// tan alt0 = cos qibla/tan observer.latitude	Morrison[142]
-		Double alt0 = AstroMath.normal(Math.toDegrees(Math.atan(Math.cos(Math.toRadians(qibla)) / Math.tan(Math.toRadians(observer.getLatitude())))));
+		double alt0 = AstroMath.normal(Math.toDegrees(Math.atan(Math.cos(Math.toRadians(qibla)) / Math.tan(Math.toRadians(observer.getLatitude())))));
 		
-		Double declination = AstroMath.normal(Math.toDegrees(Math.asin(Math.sin(Math.toRadians(23.44)) * Math.sin(Math.toRadians(zodiacAngle)))));
+		double declination = AstroMath.normal(Math.toDegrees(Math.asin(Math.sin(Math.toRadians(23.44)) * Math.sin(Math.toRadians(zodiacAngle)))));
 	
 		// sin alt1 = cos alt0 sin declination/sin observer.latitude   Morrison[142]
-		Double alt1 = AstroMath.normal(Math.toDegrees(Math.asin((Math.cos(Math.toRadians(alt0)) * Math.sin(Math.toRadians(declination))) /
+		double alt1 = AstroMath.normal(Math.toDegrees(Math.asin((Math.cos(Math.toRadians(alt0)) * Math.sin(Math.toRadians(declination))) /
                 Math.sin(Math.toRadians(observer.getLatitude())))));
 		
 		
@@ -60,7 +60,7 @@ public class ArcsOfTheSigns {
 	 * Returns an list of city names and locations 
 	 * Todo: replace with call to config file
 	 *
-	 * @return list of city locations
+	 * @return array of city locations
 	 */
 	private Location[] getCities(){			
 		Location[] citys = new Location[4];
@@ -88,9 +88,9 @@ public class ArcsOfTheSigns {
 	    // compute size of arc that contains the scale and draw it
 	    // note eventually this will be done by looking at what rings are drawn and figuring
 	    // the remaining radius
-	    Double outerRadius = myAstrolabe.getMaterRadius() - 67;
-	    Double innerRadius = outerRadius - 108;
-	    Double arcInterval;
+	    double outerRadius = myAstrolabe.getMaterRadius() - 67;
+	    double innerRadius = outerRadius - 108;
+	    double arcInterval;
 	        
 	    //draw 30 degree arcs
 	    arcInterval = 18.0;
@@ -146,9 +146,9 @@ public class ArcsOfTheSigns {
 	    
 	    // draw Noon altitude lines
 	    int[] latList = {35,40,45,50}; //target latitudes
-	    Double noonAlt;
-	    Double radius;
-	    Double interval = (outerRadius-innerRadius)/180;
+	    double noonAlt;
+	    double radius;
+	    double interval = (outerRadius-innerRadius)/180;
 		Point2D.Double currentPoint;
 	    Point2D.Double previousPoint;
 
@@ -209,7 +209,7 @@ public class ArcsOfTheSigns {
 	    String[] ZodiacLabels = {"Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius"};
 	    String[] ZodiacLabels2 = {"Gemini", "Taurus", "Aries", "Pisces", "Aquarius", "Capricorn"};
 	    double y;
-	    Double scale = 0.3;
+	    double scale = 0.3;
 	    
 	    sb = new StringBuilder();
 	    for(int i = 0; i < 6; i++){
@@ -233,7 +233,7 @@ public class ArcsOfTheSigns {
 	    out += "\n" + "gsave";
 		out += "\n" + "2.5 rotate";
 		
-	    Double x;
+	    double x;
 	    scale = 0.3;
 
         sb = new StringBuilder();
@@ -271,19 +271,19 @@ public class ArcsOfTheSigns {
 	    // compute size of arc that contains the scale.
 	    // note eventually this will be done by looking at what rings are drawn and figuring
 	    // the remaining radius
-	    Double outerRadius = myAstrolabe.getMaterRadius() - 67;
+	    double outerRadius = myAstrolabe.getMaterRadius() - 67;
 	
 		// compute equator line radius - because the size and placement of the arcs scale 
 		// will vary, we can't depend on using the myAstrolabe.equator function
-		Double radEQ = outerRadius * (Math.tan(Math.toRadians((90 - 23.44) / 2.0)));
-		Double innerRadius = radEQ * (Math.tan(Math.toRadians((90 - 23.44) / 2.0)));		
+		double radEQ = outerRadius * (Math.tan(Math.toRadians((90 - 23.44) / 2.0)));
+		double innerRadius = radEQ * (Math.tan(Math.toRadians((90 - 23.44) / 2.0)));
 		
 		//draw arcs
 		out += "\n" + "0 setgray";
 		
-		Double zodiacPos;
-		Double decl;
-		Double radius;
+		double zodiacPos;
+		double decl;
+		double radius;
 
         StringBuilder sb = new StringBuilder();
 		for (count = -9; count <= 9; count++){
@@ -334,7 +334,7 @@ public class ArcsOfTheSigns {
 	    
 	    // draw Noon altitude lines for 35,40,45,50 deg lat
 	    int[] latList = {35,40,45,50}; //target latitudes
-	    Double noonAlt;
+	    double noonAlt;
 	    Point2D.Double currentPoint;
         Point2D.Double previousPoint;
 
@@ -421,7 +421,7 @@ public class ArcsOfTheSigns {
 	    String[] ZodiacLabels = {"Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius"};
 	    String[] ZodiacLabels2 = {"Gemini", "Taurus", "Aries", "Pisces", "Aquarius", "Capricorn"};
 	    Double y;
-	    Double scale = 0.3;
+	    double scale = 0.3;
 
         sb = new StringBuilder();
 	    for(int i = 0; i < 6; i++){    	

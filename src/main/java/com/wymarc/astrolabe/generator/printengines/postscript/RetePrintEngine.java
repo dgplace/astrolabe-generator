@@ -69,7 +69,7 @@ public class RetePrintEngine {
 
         String out = "";
         out += "\n" + "%% ==================== Create Rete ====================";
-        out += "\n" + "";
+        out += "\n";
 
         if(reteType == 0 || reteType == 1){
             // draw outer circle at radius of Tropic of Capricorn
@@ -188,14 +188,14 @@ public class RetePrintEngine {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         //mark rim of rete
         out += "\n" + "0 setgray";
         out += "\n" + "0 0 " + plateEdge + " 0 360 arc stroke";
 
         out += "\n" + "%% ==================== End Create Rete ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -204,7 +204,6 @@ public class RetePrintEngine {
      * Generates EPS to draw the Zodiac on the rete
      *
      * @return String containing EPS for drawing the rete outlines
-     *
      *  Calculates the end points for the lines that represent each degree of solar
      *  longitude around the ecliptic and stores the coordinates in the 
      *  ArrayList<EclipticLine> eclipticTic.
@@ -222,8 +221,8 @@ public class RetePrintEngine {
         int i;
         int j; //counter for ten degree lines
         int k; // counter for fifteen degree lines (zodiac names)
-        Boolean tenLine;
-        Boolean fifteenLine;
+        boolean tenLine;
+        boolean fifteenLine;
 
         HashMap<String, Double> lonLine;
 
@@ -232,8 +231,7 @@ public class RetePrintEngine {
         @SuppressWarnings("unchecked")
         HashMap<String, Double>[] name = new HashMap[12];
 
-        @SuppressWarnings("unchecked")
-        ArrayList<EclipticLine> eclipticTic = new ArrayList();
+        ArrayList<EclipticLine> eclipticTic = new ArrayList<>();
 
         // Sidereal time pointer
         Point2D.Double ticStart = new Point2D.Double(-myAstrolabe.getInnerLimbRadius(), 0.0);
@@ -559,8 +557,7 @@ public class RetePrintEngine {
         double obr = Math.toRadians(AstroMath.obliquity(t));
         double yep = myAstrolabe.getEquatorRadius() * Math.tan(obr/2.0);
 
-        @SuppressWarnings("unchecked")
-        HashMap<String, Double> result = new HashMap();
+        HashMap<String, Double> result = new HashMap<>();
 
         if( gl%90 == 0 ){
         	//Points at quadrants
@@ -864,7 +861,7 @@ public class RetePrintEngine {
         out += "\n" + "grestore";
         out += "\n" + "gsave";
         out += "\n" + "306 396 translate";
-        out += "\n" + "";
+        out += "\n";
         out += buildRete();
 
         if(myAstrolabe.getReteType() == 0 || myAstrolabe.getReteType() == 1){
@@ -876,7 +873,7 @@ public class RetePrintEngine {
         out += zodiac();
 
         //fileIn = grid(fileIn); //comment out in production
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "grestore";
 
         // Write Footer

@@ -76,7 +76,7 @@ public class FrontPrintEngine {
             label = " " + label + "S";
         }
 
-        Double y = (-((myAstrolabe.getCapricornRadius()+ myAstrolabe.getEquatorRadius()) / 2.0));
+        double y = (-((myAstrolabe.getCapricornRadius()+ myAstrolabe.getEquatorRadius()) / 2.0));
 
         String out = "";
         out += "\n" + "%% ================ Draw Front Labels =================";
@@ -84,7 +84,7 @@ public class FrontPrintEngine {
         out += "\n" + "NormalFont12 setfont";
         out += "\n 0 " + y + " moveto";
         out += EPSToolKit.centerText(label);
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "%% ================ End Front Labels =================";
 
         return out;
@@ -467,18 +467,18 @@ public class FrontPrintEngine {
             out += "\n" + "newpath";
             out += "\n" + "0 setgray";
             out += "\n" + "0 0 " + (myAstrolabe.getInnerLimbRadius()) + " 0 360 arc stroke";
-            out += "\n" + "";
+            out += "\n";
         }
         out += "\n" + "%% Set Clipping";
         out += "\n" + "0 0 " + myAstrolabe.getCapricornRadius() + " 0 360 arc clip";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "%% Find center of page and mark it";
         out += "\n" + "0 0 5 0 360 arc stroke";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "%% draw The Tropics";
         out += "\n" + "newpath";
         out += computeTropics(myAstrolabe);
-        out += "\n" + "";
+        out += "\n";
         if (myAstrolabe.getShowHorizonPlate()){ // if we want the horizon plate
             out += "\n" + "newpath";
             out += computeHorizonPlate(myAstrolabe);
@@ -486,28 +486,28 @@ public class FrontPrintEngine {
             out += "\n" + "%% Label the Plate";
             out += "\n" + "newpath";
             out += labelPlate(myAstrolabe);
-            out += "\n" + "";
+            out += "\n";
             out += "\n" + "%% draw The Almucantars";
             out += "\n" + "newpath";
             out += computeAlmucantars(myAstrolabe);
-            out += "\n" + "";
+            out += "\n";
             if (myAstrolabe.getShowUnequalHoursLines()){
                 out += "\n" + "%% draw The Unequal Hour Lines";
                 out += "\n" + "newpath";
                 out += computeUnequalHours(myAstrolabe);
-                out += "\n" + "";
+                out += "\n";
             }
             if (myAstrolabe.getShowAzimuthLines()){
                 out += "\n" + "%% draw The azimuth Lines";
                 out += "\n" + "newpath";
                 out += computeAzimuthLines(myAstrolabe);
-                out += "\n" + "";
+                out += "\n";
             }
             if (myAstrolabe.getShowHousesofHeavenLines()){
                 out += "\n" + "%% draw The azimuth Lines";
                 out += "\n" + "newpath";
                 out += computeHousesOfHeaven(myAstrolabe);
-                out += "\n" + "";
+                out += "\n";
             }
             out += "\n" + "%% Clear zenith circle";
             out += clearZenith(myAstrolabe);
@@ -521,9 +521,9 @@ public class FrontPrintEngine {
         out += "\n" + "0 " + myAstrolabe.getCapricornRadius() + " lineto";
         out += "\n" + "stroke";
         out += "\n" + ".1 setlinewidth";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "%% ==================== End Build Plate ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -699,8 +699,8 @@ public class FrontPrintEngine {
         }
 
         // Label the degree scale, if any
-        Double labelRadius;
-        Double fontSize;
+        double labelRadius;
+        double fontSize;
 
         if(myAstrolabe.getHourMarkings() != 3){//if there is a visible Hour Scale
             labelRadius =(myAstrolabe.getInnerLimbRadius() + 5);
@@ -746,7 +746,6 @@ public class FrontPrintEngine {
 
     /**
      * Draws the limb of the Astrolabe and labels it
-     *
      * since   0.1
      *
      */
@@ -764,7 +763,7 @@ public class FrontPrintEngine {
         out += labelLimbScale();
 
         out += "\n" + "%% ==================== End Create Mater Limb ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -1057,7 +1056,7 @@ public class FrontPrintEngine {
 
         out += "\n" + "306 396 translate";
         out += "\n" + ".1 setlinewidth";
-        out += "\n" + "";
+        out += "\n";
         out += EPSToolKit.setUpFonts();
         out += EPSToolKit.setUpCircularText();
 
@@ -1072,7 +1071,7 @@ public class FrontPrintEngine {
                 out += EPSToolKit.buildMaterThrone(myAstrolabe);
             }
             out += "\n" + "grestore";
-            out += "\n" + "";
+            out += "\n";
             if (isLaser){
                 out += "\n" + "gsave";
                 out += "\n" + "1 0 0 setrgbcolor";
@@ -1090,20 +1089,20 @@ public class FrontPrintEngine {
             out += "\n" + "gsave";
             out += buildMaterLimb();
             out += "\n" + "grestore";
-            out += "\n" + "";
+            out += "\n";
         }
 
         if (myAstrolabe.getFrontPrintOption() == 3){ // if the mater and quad
             out += "\n" + "gsave";
             out += buildNauticum();
             out += "\n" + "grestore";
-            out += "\n" + "";
+            out += "\n";
         }
         if (myAstrolabe.getFrontPrintOption() == 0 || myAstrolabe.getFrontPrintOption() == 1){ // if not just the mater
             out += "\n" + "gsave";
             out += buildPlate();
             out += "\n" + "grestore";
-            out += "\n" + "";
+            out += "\n";
         }
 
         // mark pivot point
@@ -1118,7 +1117,7 @@ public class FrontPrintEngine {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         // Write Footer
         out += "\n" + "% Eject the page";

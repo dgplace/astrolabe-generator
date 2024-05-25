@@ -45,11 +45,11 @@ public class EPSToolKit {
         out += "\n" + "%% Astrolabe Generator Postscript file";
         out += "\n" + "%% for Latitude: " + myAstrolabe.getLocation().getLatitude();
         out += "\n" + "%% for Longitude: " + myAstrolabe.getLocation().getLongitude();
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "mark";
         out += "\n" + "/Astrolabe 10 dict def %local variable dictionary";
         out += "\n" + "Astrolabe begin";
-        out += "\n" + "";
+        out += "\n";
         return out;
     }
 
@@ -152,7 +152,6 @@ public class EPSToolKit {
 
     /**
      * Sets up fonts
-     *
      * Run once at the beginning of the PS/EPS  file, after the header code
      *
      * @return String EPS output
@@ -203,7 +202,6 @@ public class EPSToolKit {
 
     /**
      * Sets up PS routines to print rotated text
-     *
      * Run once at the beginning of the PS/EPS  file, after the header code
      *
      * @return String EPS output
@@ -235,10 +233,8 @@ public class EPSToolKit {
 
     /**
      * Sets up a set of PS routines to print circular text
-     *
      * Postscript routine gleefully stolen and modified from the "Blue Book":
      * PostScript Language Tutorial and Cookbook, Adobe Systems Inc.
-     *
      * Run once at the beginning of the PS/EPS  file, after the header code
      *
      * @return String EPS output
@@ -253,10 +249,10 @@ public class EPSToolKit {
         out += "\n" + "/ptsize exch def";
         out += "\n" + "/str exch def";
         out += "\n" + "/xradius radius ptsize 4 div add def";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "gsave";
         out += "\n" + "centerangle str findhalfangle add rotate";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "str";
         out += "\n" + "{ /charcode exch def";
         out += "\n" + "( ) dup 0 charcode put outsideplacechar";
@@ -264,7 +260,7 @@ public class EPSToolKit {
         out += "\n" + "grestore";
         out += "\n" + "end";
         out += "\n" + "} def";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "/insidecircletext";
         out += "\n" + "{ circtextdict begin";
         out += "\n" + "/radius exch def /centerangle exch def";
@@ -279,14 +275,14 @@ public class EPSToolKit {
         out += "\n" + "grestore";
         out += "\n" + "end";
         out += "\n" + "} def";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "/circtextdict 16 dict def";
         out += "\n" + "circtextdict begin";
         out += "\n" + "/findhalfangle";
         out += "\n" + "{ stringwidth pop 2 div";
         out += "\n" + "2 xradius mul pi mul div 360 mul";
         out += "\n" + "} def";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "/outsideplacechar";
         out += "\n" + "{ /char exch def";
         out += "\n" + "/halfangle char findhalfangle def";
@@ -299,7 +295,7 @@ public class EPSToolKit {
         out += "\n" + "grestore";
         out += "\n" + "halfangle 2 mul neg rotate";
         out += "\n" + "} def";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "/insideplacechar";
         out += "\n" + "{ /char exch def";
         out += "\n" + "/halfangle char findhalfangle def";
@@ -314,7 +310,7 @@ public class EPSToolKit {
         out += "\n" + "} def";
         out += "\n" + "/pi 3.1415923 def";
         out += "\n" + "end";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "%% ================ End Circular Text Routine =================";
 
         return out;
@@ -460,9 +456,9 @@ public class EPSToolKit {
      */
     public static String buildMaterThrone(Astrolabe myAstrolabe){
         String out = "";
-        Double innerRadius = (72 * myAstrolabe.getPlateDiameter()) / 2;
+        Double innerRadius = (72 * myAstrolabe.getPlateDiameter()) / 2.0;
         Double limb = 72 * myAstrolabe.getLimbWidth();
-        Double outerRadius = innerRadius + limb;
+        double outerRadius = innerRadius + limb;
 
         out += "\n" + "%% ================ Draw Throne =================";
         out += "\n" + "0 " + (outerRadius + 31) +" 7 0 360 arc stroke";
@@ -475,15 +471,14 @@ public class EPSToolKit {
 
     /**
      * Draws alternate astrolabe throne
-     *
      * since   2.0
      *
      */
     public static String buildMaterThrone2(Astrolabe myAstrolabe){
         String out = "";
-        Double innerRadius = (72 * myAstrolabe.getPlateDiameter()) / 2;
+        Double innerRadius = (72 * myAstrolabe.getPlateDiameter()) / 2.0;
         Double limb = 72 * myAstrolabe.getLimbWidth();
-        Double outerRadius = innerRadius + limb;
+        double outerRadius = innerRadius + limb;
 
         out += "\n" + "%% ================ Draw Throne =================";
         out += "\n" + "0 " + (outerRadius + 31) +" 7 0 360 arc stroke";
@@ -497,15 +492,14 @@ public class EPSToolKit {
 
     /**
      * Draws bottom screw mount
-     *
      * since   2.0
      *
      */
     public static String buildScrewMount(Astrolabe myAstrolabe){
         String out = "";
-        Double innerRadius = (72 * myAstrolabe.getPlateDiameter()) / 2;
+        Double innerRadius = (72 * myAstrolabe.getPlateDiameter()) / 2.0;
         Double limb = 72 * myAstrolabe.getLimbWidth();
-        Double outerRadius = innerRadius + limb;
+        double outerRadius = innerRadius + limb;
 
         out += "\n" + "%% ================ Draw Screw mount =================";
         out += "\n" + "0 " + (outerRadius + 13) +" 5 0 360 arc stroke";
@@ -520,7 +514,6 @@ public class EPSToolKit {
 
     /**
      * Draws an decorative octagonal frame around the limb
-     *
      * Since 2.0
      *
      */
@@ -533,8 +526,8 @@ public class EPSToolKit {
          *
          */
         String fileOut = "";
-        Double radius = myAstrolabe.getMaterRadius() + 25;
-        Double degreeInterval = 45.0;
+        double radius = myAstrolabe.getMaterRadius() + 25;
+        double degreeInterval = 45.0;
         fileOut += "\n" + "%% ==================== Create Octagon Limb ====================";
         fileOut += "\n" + "1 setgray";
         fileOut += "\n" + -degreeInterval/2.0 + " rotate";
@@ -565,7 +558,7 @@ public class EPSToolKit {
         fileOut += "\n" + degreeInterval/2.0 + " rotate";
 
         fileOut += "\n" + "%% ==================== End Create Octagon Limb ====================";
-        fileOut += "\n" + "";
+        fileOut += "\n";
 
         return fileOut;
     }

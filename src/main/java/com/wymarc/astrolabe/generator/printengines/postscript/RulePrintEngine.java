@@ -38,7 +38,7 @@ public class RulePrintEngine {
 
         String out = "";
         out += "\n" + "%% ==================== Create Single Rule ====================";
-        out += "\n" + "";
+        out += "\n";
 
         // draw right rule
         out += "\n" + "%% Draw rule";
@@ -51,7 +51,7 @@ public class RulePrintEngine {
         out += "\n" + "25 5 lineto";
         out += "\n" + ruleLength+" 5 lineto";
         out += "\n" + "stroke";
-        out += "\n" + "";
+        out += "\n";
 
         // draw rule pivot
         out += "\n" + "%% Mark pivot";
@@ -63,7 +63,7 @@ public class RulePrintEngine {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         if (scale)
         {
@@ -80,7 +80,7 @@ public class RulePrintEngine {
         }
 
         out += "\n" + "%% ==================== End Create Single Rule ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -97,7 +97,7 @@ public class RulePrintEngine {
 
         String out = "";
         out += "\n" + "%% ==================== Create Double Rule ====================";
-        out += "\n" + "";
+        out += "\n";
 
         // draw left rule
         out += "\n" + "newpath";
@@ -109,7 +109,7 @@ public class RulePrintEngine {
         out += "\n" + "-25 -5 lineto";
         out += "\n" + -ruleLength+" -5 lineto";
         out += "\n" + "stroke";
-        out += "\n" + "";
+        out += "\n";
 
         // draw right rule
         out += "\n" + "%% Draw rule";
@@ -122,7 +122,7 @@ public class RulePrintEngine {
         out += "\n" + "25 5 lineto";
         out += "\n" + ruleLength+" 5 lineto";
         out += "\n" + "stroke";
-        out += "\n" + "";
+        out += "\n";
 
         // draw rule pivot
         out += "\n" + "%% Mark pivot";
@@ -134,7 +134,7 @@ public class RulePrintEngine {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         if (scale)
         {
@@ -151,7 +151,7 @@ public class RulePrintEngine {
         }
 
         out += "\n" + "%% ==================== End Create Double Rule ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -212,7 +212,7 @@ public class RulePrintEngine {
 
         String out = "";
         out += "\n" + "%% ==================== Create Alidade ====================";
-        out += "\n" + "";
+        out += "\n";
 
         // draw left Alidade
         out += "\n" + "newpath";
@@ -224,7 +224,7 @@ public class RulePrintEngine {
         out += "\n" + "-25 -5 lineto";
         out += "\n" + -ruleLength+" -5 lineto";
         out += "\n" + "stroke";
-        out += "\n" + "";
+        out += "\n";
 
         if(counterChange)
         {
@@ -239,7 +239,7 @@ public class RulePrintEngine {
             out += "\n" + "25 5 lineto";
             out += "\n" + ruleLength+" 5 lineto";
             out += "\n" + "stroke";
-            out += "\n" + "";
+            out += "\n";
         }else
         {
             // do not counterchange the Alidade
@@ -253,7 +253,7 @@ public class RulePrintEngine {
             out += "\n" + "25 -5 lineto";
             out += "\n" + ruleLength+" -5 lineto";
             out += "\n" + "stroke";
-            out += "\n" + "";
+            out += "\n";
         }
 
         // draw Alidade pivot
@@ -266,7 +266,7 @@ public class RulePrintEngine {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         // Equation of time scale
         if(myAstrolabe.getShowEquationOfTime()){
@@ -356,7 +356,7 @@ public class RulePrintEngine {
         }
 
         out += "\n" + "%% ==================== End Create Alidade ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -382,39 +382,39 @@ public class RulePrintEngine {
         out += EPSToolKit.setUpFonts();
         out += "\n" + "gsave";
         out += "\n" + "306 110 translate";
-        out += "\n" + "";
+        out += "\n";
         out += buildSingleRule(true, false);
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "grestore";
         out += "\n" + "gsave";
         out += "\n" + "306 220 translate";
-        out += "\n" + "";
+        out += "\n";
         out += buildSingleRule(false, showLabel);
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "grestore";
         out += "\n" + "gsave";
         out += "\n" + "306 330 translate";
-        out += "\n" + "";
+        out += "\n";
         out += buildDoubleRule(true, false);
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "grestore";
         out += "\n" + "gsave";
         out += "\n" + "306 440 translate";
-        out += "\n" + "";
+        out += "\n";
         out += buildDoubleRule(false, showLabel);
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "grestore";
         out += "\n" + "gsave";
         out += "\n" + "306 550 translate";
-        out += "\n" + "";
+        out += "\n";
         out += buildAlidade(true, false);
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "grestore";
         out += "\n" + "gsave";
         out += "\n" + "306 660 translate";
-        out += "\n" + "";
+        out += "\n";
         out += buildAlidade(false, showLabel);
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "grestore";
 
         // Write Footer
@@ -448,9 +448,9 @@ public class RulePrintEngine {
         {
             out += "\n" + "gsave";
             out += "\n" + "306 " + i*72 + " translate";
-            out += "\n" + "";
+            out += "\n";
             out += buildAlidade(counterChange, false);
-            out += "\n" + "";
+            out += "\n";
             out += "\n" + "grestore";
         }
         // Write Footer
@@ -484,9 +484,9 @@ public class RulePrintEngine {
         {
             out += "\n" + "gsave";
             out += "\n" + "306 " + i*72 + " translate";
-            out += "\n" + "";
+            out += "\n";
             out += buildDoubleRule(counterChange, false);
-            out += "\n" + "";
+            out += "\n";
             out += "\n" + "grestore";
         }
 
