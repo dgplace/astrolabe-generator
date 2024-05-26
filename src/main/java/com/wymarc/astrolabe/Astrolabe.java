@@ -124,6 +124,7 @@ public class Astrolabe {
 
     private boolean printBasicHoraryQuadrant;   //print the basic type horary quadrant as an extra
     private boolean printAdvancedHoraryQuadrant;//print the adv type horary quadrant as an extra
+    private boolean printQuadransVetus;         //print the Quadrans Vetus as an extra
     private boolean printEqualHoursHoraryQuadrant;//print the equal hours type horary quadrant as an extra
     private boolean printSineQuadrant;          //print the sine quadrant as an extra
     private boolean printColorSineQuadrant;     //print the colored sine quadrant as an extra
@@ -544,6 +545,14 @@ public class Astrolabe {
 
     public void setPrintAdvancedHoraryQuadrant(boolean printAdvancedHoraryQuadrant) {
         this.printAdvancedHoraryQuadrant = printAdvancedHoraryQuadrant;
+    }
+
+    public boolean getPrintQuadransVetus() {
+        return printQuadransVetus;
+    }
+
+    public void setPrintPrintQuadransVetus(boolean printQuadransVetus) {
+        this.printQuadransVetus = printQuadransVetus;
     }
 
     public boolean getPrintEqualHoursHoraryQuadrant() {

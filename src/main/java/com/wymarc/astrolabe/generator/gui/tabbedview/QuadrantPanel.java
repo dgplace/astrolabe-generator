@@ -31,6 +31,7 @@ import java.awt.event.MouseListener;
 public class QuadrantPanel extends JPanel implements ActionListener,MouseListener {
     private JCheckBox simpleHoraryCheck = null;
     private JCheckBox advancedHoraryCheck = null;
+    private JCheckBox quadransVetusCheck = null;
     private JCheckBox equalHoursHoraryCheck = null;
     private JCheckBox sineCheck = null;
     private JCheckBox colorSineCheck = null;
@@ -58,6 +59,8 @@ public class QuadrantPanel extends JPanel implements ActionListener,MouseListene
         optionsPanel.add(getSimpleHoraryCheck(),c);
         c.gridy++;
         optionsPanel.add(getAdvancedHoraryCheck(),c);
+        c.gridy++;
+        optionsPanel.add(getQuadransVetusCheck(),c);
         c.gridy++;
         optionsPanel.add( new JSeparator(JSeparator.HORIZONTAL),c);
         c.gridy++;
@@ -106,6 +109,18 @@ public class QuadrantPanel extends JPanel implements ActionListener,MouseListene
             advancedHoraryCheck.addMouseListener(this);
         }
         return advancedHoraryCheck;
+    }
+
+    private JCheckBox getQuadransVetusCheck(){
+        if (null == quadransVetusCheck){
+            quadransVetusCheck = new JCheckBox("Quadrans Vetus");
+            quadransVetusCheck.setSelected(GeneratorGui.MY_ASTROLABE.getPrintQuadransVetus());
+            quadransVetusCheck.setToolTipText("Include a Quadrans Vetus");
+            quadransVetusCheck.setActionCommand("QuadransVetusHorary");
+            quadransVetusCheck.addActionListener(this);
+            quadransVetusCheck.addMouseListener(this);
+        }
+        return quadransVetusCheck;
     }
 
     private JCheckBox getEqualHoursHoraryCheck(){
@@ -161,11 +176,18 @@ public class QuadrantPanel extends JPanel implements ActionListener,MouseListene
         if (cmd.equals("UnequalHorary")) {
             GeneratorGui.MY_ASTROLABE.setPrintBasicHoraryQuadrant(getSimpleHoraryCheck().isSelected());
         }else if (cmd.equals("AdvancedUnequalHorary")) {
-            // this quadrant is limited to as to latitude
+            // this quadrant is limited as to latitude
             if (withinLimits()){
                 GeneratorGui.MY_ASTROLABE.setPrintAdvancedHoraryQuadrant(getAdvancedHoraryCheck().isSelected());
             }else{
                 getAdvancedHoraryCheck().setSelected(false);
+            }
+        }else if (cmd.equals("QuadransVetusHorary")) {
+            // this quadrant is limited as to latitude
+            if (withinLimits()){
+                GeneratorGui.MY_ASTROLABE.setPrintPrintQuadransVetus(getQuadransVetusCheck().isSelected());
+            }else{
+                getQuadransVetusCheck().setSelected(false);
             }
         }else if (cmd.equals("EqualHoursHorary")) {
             // this quadrant is limited to as to latitude

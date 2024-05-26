@@ -521,7 +521,8 @@ public class QuadransVetus {
         return out.toString();
     }
 
-    public String printQuadrant(Astrolabe myAstrolabe) {
+    public String printQuadrant(Astrolabe myAstrolabeIn) {
+        myAstrolabe = myAstrolabeIn;
         StringBuilder out = new StringBuilder();
 
         // Write header to file

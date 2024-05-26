@@ -146,17 +146,17 @@ public class EPSPrintEngine {
 //            selectedComponents.add(component);
 //        }
         if (GeneratorGui.MY_ASTROLABE.getPrintAdvancedHoraryQuadrant()){
-            QuadransVetus quadransVetus = new QuadransVetus();
-            component = new ArrayList<>();
-            component.add("QuadransVetus.eps");
-            component.add(quadransVetus.printQuadrant(GeneratorGui.MY_ASTROLABE));
-            selectedComponents.add(component);
-        }
-        if (GeneratorGui.MY_ASTROLABE.getPrintAdvancedHoraryQuadrant()){
             AdvancedHoraryQuadrant advancedHoraryQuadrant = new AdvancedHoraryQuadrant();
             component = new ArrayList<>();
             component.add("AdvancedHoraryQuadrant.eps");
             component.add(advancedHoraryQuadrant.printQuadrant(GeneratorGui.MY_ASTROLABE));
+            selectedComponents.add(component);
+        }
+        if (GeneratorGui.MY_ASTROLABE.getPrintQuadransVetus()){
+            QuadransVetus quadransVetus = new QuadransVetus();
+            component = new ArrayList<>();
+            component.add("QuadransVetus.eps");
+            component.add(quadransVetus.printQuadrant(GeneratorGui.MY_ASTROLABE));
             selectedComponents.add(component);
         }
         if (GeneratorGui.MY_ASTROLABE.getPrintSineQuadrant()){

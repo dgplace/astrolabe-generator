@@ -1,0 +1,15 @@
+Process for converting EPS file to thumbnail for the astrolabe generator
+
+Open EPS file in a text editor
+
+Search for setlinewidth
+Set line size to .5: 
+.5 setlinewidth
+repeat for all instances
+
+Import into Photoshop (File, Open)
+
+Import 8.5 by 11 size, 200 resolution, grayscale, 
+adjust levels to 150 (Image, Adjustments, Levels)
+Resize h 540
+

@@ -92,6 +92,7 @@ public class ThumbNail extends JPanel{
 
     private JLabel simpleHorary = null;
     private JLabel advancedHorary = null;
+    private JLabel quadransVetus = null;
     private JLabel equalHoursHorary = null;
     private JLabel sineQuadrant = null;
     private JLabel colorSineQuadrant = null;
@@ -166,6 +167,7 @@ public class ThumbNail extends JPanel{
         // create the layers for the quadrant view
         simpleHorary = createLayer("gui/images/quadrants/simplehorary.png");
         advancedHorary = createLayer("gui/images/quadrants/advancedhorary.png");
+        quadransVetus = createLayer("gui/images/quadrants/quadransvetus.png");
         equalHoursHorary = createLayer("gui/images/quadrants/equalhourshorary.png");
         sineQuadrant = createLayer("gui/images/quadrants/sinequadrant.png");
         colorSineQuadrant = createLayer("gui/images/quadrants/colorsinequadrant.png");
@@ -513,6 +515,7 @@ public class ThumbNail extends JPanel{
 
             layeredPane.add(simpleHorary, 0, 0);
             layeredPane.add(advancedHorary, 0, 0);
+            layeredPane.add(quadransVetus, 0, 0);
             layeredPane.add(equalHoursHorary, 0, 0);
             layeredPane.add(sineQuadrant, 0, 0);
             layeredPane.add(colorSineQuadrant, 0, 0);
@@ -526,6 +529,7 @@ public class ThumbNail extends JPanel{
     private void blankQuadrantThumbNail(){
         simpleHorary.setVisible(false);
         advancedHorary.setVisible(false);
+        quadransVetus.setVisible(false);
         equalHoursHorary.setVisible(false);
         sineQuadrant.setVisible(false);
         colorSineQuadrant.setVisible(false);
@@ -540,6 +544,8 @@ public class ThumbNail extends JPanel{
             simpleHorary.setVisible(true);
         }else if (hoverObject.equals("AdvancedUnequalHorary")){
             advancedHorary.setVisible(true);
+        }else if (hoverObject.equals("QuadransVetusHorary")){
+            quadransVetus.setVisible(true);
         }else if (hoverObject.equals("EqualHoursHorary")){
             equalHoursHorary.setVisible(true);
         }else if (hoverObject.equals("SineQuadrant")){
