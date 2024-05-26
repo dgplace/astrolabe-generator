@@ -69,7 +69,7 @@ public class Lunar {
         out += "\n" + "0 -2 rlineto ";
         out += "\n" + "closepath    ";
         out += "\n" + "}def         ";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "%% ================ End Set Up CrossCross routine =================";
 
         return out;
@@ -244,7 +244,7 @@ public class Lunar {
 
         out += "\n" + "0 setgray";
         out += "\n" + "%% ==================== End Create zodiac ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -343,7 +343,7 @@ public class Lunar {
         out += "\n" + "0 setgray";
 
         out += "\n" + "%% ==================== End Create sun disc ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -462,7 +462,7 @@ public class Lunar {
 
         out += "\n" + "0 setgray";
         out += "\n" + "%% ==================== End Create moon disc ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -570,7 +570,7 @@ public class Lunar {
         out += "\n" + "0 setgray";
         out += "\n" + "0 -123 crosscross fill";
         out += "\n" + "%% ==================== End create day length scale ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -653,7 +653,7 @@ public class Lunar {
         }
         out += "\n" + "grestore";
         out += "\n" + "%% ==================== End create noon altitude scale ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -684,7 +684,7 @@ public class Lunar {
         out += "\n" + "gsave";
         double rotationIncrement = (double)360/1440; //degrees per minute
         int count;
-        // create 15 minute marks
+        // create 15-minute marks
         for (count = 1; count <= 96; count++){
             out += "\n" + (innerRadius + 12) + " 0 moveto";
             out += "\n" + (innerRadius + 15) + " 0 lineto stroke";
@@ -785,7 +785,7 @@ public class Lunar {
 
         out += "\n" + "%% ==================== end create wind rose ====================";
         out += "\n" + "% ==================== end create base sheet ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -809,7 +809,7 @@ public class Lunar {
 
         out += "\n" + "306 396 translate";
         out += "\n" + lineWidth + " setlinewidth";
-        out += "\n" + "";
+        out += "\n";
         out += EPSToolKit.setUpFonts();
         out += EPSToolKit.setUpCircularText();
         out += setUpCrossCross();
@@ -818,22 +818,22 @@ public class Lunar {
         out += "\n" + "gsave";
         out += buildConcentricCalendarRing();
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         out += "\n" + "gsave";
         out += buildZodiac();
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         out += "\n" + "gsave";
         out += buildNoonAltitudeScale();
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         out += "\n" + "gsave";
         out += buildDayLengthScale();
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         // mark pivot point
         out += "\n" + "%% Mark pivot";
@@ -847,7 +847,7 @@ public class Lunar {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "% ==================== end create zodiac calendar disc ====================";
 
         // Write Footer
@@ -876,14 +876,14 @@ public class Lunar {
 
         out += "\n" + "306 396 translate";
         out += "\n" + lineWidth + " setlinewidth";
-        out += "\n" + "";
+        out += "\n";
         out += EPSToolKit.setUpFonts();
         out += EPSToolKit.setUpCircularText();
 
         out += "\n" + "gsave";
         out += buildSunDisc();
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         // mark pivot point
         out += "\n" + "%% Mark pivot";
@@ -897,7 +897,7 @@ public class Lunar {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         // Write Footer
         out += "\n" + "% Eject the page";
@@ -925,14 +925,14 @@ public class Lunar {
 
         out += "\n" + "306 396 translate";
         out += "\n" + lineWidth + " setlinewidth";
-        out += "\n" + "";
+        out += "\n";
         out += EPSToolKit.setUpFonts();
         out += EPSToolKit.setUpCircularText();
 
         out += "\n" + "gsave";
         out += buildMoonDisc();
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         // mark pivot point
         out += "\n" + "%% Mark pivot";
@@ -946,7 +946,7 @@ public class Lunar {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         // Write Footer
         out += "\n" + "% Eject the page";
@@ -974,14 +974,14 @@ public class Lunar {
 
         out += "\n" + "306 396 translate";
         out += "\n" + lineWidth + " setlinewidth";
-        out += "\n" + "";
+        out += "\n";
         out += EPSToolKit.setUpFonts();
         out += EPSToolKit.setUpCircularText();
 
         out += "\n" + "gsave";
         out += buildVolvelleBase();
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         // mark pivot point
         out += "\n" + "%% Mark pivot";
@@ -995,7 +995,7 @@ public class Lunar {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         // Write Footer
         out += "\n" + "% Eject the page";

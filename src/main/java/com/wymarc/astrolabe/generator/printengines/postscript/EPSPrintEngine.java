@@ -25,7 +25,6 @@ import com.wymarc.astrolabe.generator.printengines.postscript.extras.horary.Adva
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.horary.EqualHours;
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.horary.BasicHoraryQuadrant;
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.horary.QuadransVetus;
-import com.wymarc.astrolabe.generator.printengines.postscript.extras.laserFiles.LatitudeRing;
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.laserFiles.VernierSineQuadrantLaser;
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.laserFiles.ZodiacSineQuadrantLaser;
 import com.wymarc.astrolabe.generator.printengines.postscript.extras.sine.VernierSineQuadrant;
@@ -123,12 +122,6 @@ public class EPSPrintEngine {
             component.add(myAstrolabeRule.buildAlidadeSheet(GeneratorGui.MY_ASTROLABE, GeneratorGui.MY_ASTROLABE.isCounterChanged()));
             selectedComponents.add(component);
         }
-        // print climate plate sets, if any
-//            for (JCheckBox chk : GeneratorGui.MY_ASTROLABE.getClimateSetCheckboxes()){
-//                if (chk.isSelected()){
-//                    //todo print the suckers
-//                }
-//            }
 
         // quadrants
         if (GeneratorGui.MY_ASTROLABE.getPrintBasicHoraryQuadrant()){
@@ -138,13 +131,7 @@ public class EPSPrintEngine {
             component.add(basicHoraryQuad.printQuadrant());
             selectedComponents.add(component);
         }
-//        if (GeneratorGui.MY_ASTROLABE.getPrintAdvancedHoraryQuadrant()){
-//            LatitudeRing latitudeRing = new LatitudeRing();
-//            component = new ArrayList<>();
-//            component.add("latitudeRing.eps");
-//            component.add(latitudeRing.create(GeneratorGui.MY_ASTROLABE));
-//            selectedComponents.add(component);
-//        }
+
         if (GeneratorGui.MY_ASTROLABE.getPrintAdvancedHoraryQuadrant()){
             AdvancedHoraryQuadrant advancedHoraryQuadrant = new AdvancedHoraryQuadrant();
             component = new ArrayList<>();
@@ -251,7 +238,7 @@ public class EPSPrintEngine {
 //            }
 
 
-        // Volvelle project, to be removed at some point
+        // Volvelle project, to be updated and integrated into gui at some point
 //        Lunar lunarVolvelle = new Lunar();
 //
 //        component = new ArrayList<>();
@@ -274,7 +261,7 @@ public class EPSPrintEngine {
 //        component.add(lunarVolvelle.createVolvelleMoonDisc(GeneratorGui.MY_ASTROLABE));
 //        selectedComponents.add(component);
 
-        // todo LASER CUTTER files
+        // todo LASER CUTTER files, needs to be integrated
 //        SineQuadrantLaser mySineQuadrantLaser = new SineQuadrantLaser();  //todo colored for laser cutter
 //        component = new ArrayList<>();
 //        component.add("SineQuadrantLaser.eps");
@@ -282,21 +269,35 @@ public class EPSPrintEngine {
 //        selectedComponents.add(component);
 
 
-        // todo
-        // quadrants, tools, instructions etc
-//            Dastur myDastur = new Dastur();                     // todo tool
-//            dataString = myDastur.createDastur();
-//            save(filePath + "/myDastur.eps",dataString);
-//
-//            QuadrantTwo myAstrolabeQuad2 = new QuadrantTwo();  //todo small sine quadrant
-//            dataString = myAstrolabeQuad2.printQuadrant();
-//            save(filePath + "/QuadrantTwo.eps",dataString);
-//
-//            DemoArms myDemoArms = new DemoArms();
-//            dataString = myDemoArms.printArms();
-//            save(filePath + "/DemoArms.eps",dataString);
+        // Unused code. Save for reference
+        // quadrants, tools, instructions etc.
+        // Tool from Morrison's book
+//        Dastur myDastur = new Dastur();
+//        component = new ArrayList<>();
+//        component.add("dastur.eps");
+//        component.add(myDastur.createDastur());
+//        selectedComponents.add(component);
 
+        // Prints smaller version of the sine quadrant
+//        QuadrantTwo myAstrolabeQuad2 = new QuadrantTwo();  //todo small sine quadrant
+//        component = new ArrayList<>();
+//        component.add("QuadrantTwo.eps");
+//        component.add(myAstrolabeQuad2.printQuadrant());
+//        selectedComponents.add(component);
 
+        // DemoArms prints a sheet of rulers for use in demos Keep, but not currently used
+//        DemoArms myDemoArms = new DemoArms();
+//        component = new ArrayList<>();
+//        component.add("DemoArms.eps");
+//        component.add(myDemoArms.printArms());
+//        selectedComponents.add(component);
+
+        // Latitude ring bare bones, set up for laser only. needs work
+//        LatitudeRing latitudeRing = new LatitudeRing();
+//        component = new ArrayList<>();
+//        component.add("latitudeRing.eps");
+//        component.add(latitudeRing.create(GeneratorGui.MY_ASTROLABE));
+//        selectedComponents.add(component);
 
         return selectedComponents;
     }

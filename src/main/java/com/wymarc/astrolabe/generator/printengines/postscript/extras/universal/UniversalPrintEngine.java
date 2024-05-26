@@ -29,7 +29,7 @@ import java.awt.geom.Point2D;
 public class UniversalPrintEngine {
 
     private Astrolabe myAstrolabe = new Astrolabe();
-    private boolean forCAD = true; // Each layer a separate color for using with CAD/cutting software
+    //private boolean forCAD = true; // Each layer a separate color for using with CAD/cutting software
 
     /**
      * Draws the plate and its lines
@@ -43,7 +43,7 @@ public class UniversalPrintEngine {
         out += "\n" + "newpath";
         out += "\n" + "0 setgray";
         out += "\n" + "0 0 " + (myAstrolabe.getUniversalLimbRadius()) + " 0 360 arc stroke";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "%% Find center of page and mark it";
         out += "\n" + "0 0 5 0 360 arc stroke";
         out += "\n" + "%% draw compass points";
@@ -54,9 +54,9 @@ public class UniversalPrintEngine {
         out += "\n" + "newpath";
         out += "\n" + "0 " + -myAstrolabe.getUniversalLimbRadius() + " moveto";
         out += "\n" + "0 " + myAstrolabe.getUniversalLimbRadius() + " lineto stroke";
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "%% ==================== End Build Plate ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -85,7 +85,7 @@ public class UniversalPrintEngine {
                 double angle21 = interSect2.getAngle1();
                 double angle22 = interSect2.getAngle2();
 
-                if (!forCAD){
+                if (!myAstrolabe.getLaserSupport()){
                     if ( count % 2 != 0 ) {
                         out += "\n" + ".5 setgray";
                     }
@@ -101,7 +101,7 @@ public class UniversalPrintEngine {
                     out += "\n" + "newpath";
                     out += "\n" + (-MyCircle.getCenter().x) + " " + MyCircle.getCenter().y + " " + MyCircle.getRadius() + " " + angle21 + " " + 180 + " arc stroke";
                 }
-                if (!forCAD){
+                if (!myAstrolabe.getLaserSupport()){
                     if ( count % 2 != 0 ) {
                         out += "\n" + "0 setgray";
                     }
@@ -119,7 +119,7 @@ public class UniversalPrintEngine {
 
         // First clear poles for neatness
         int highestLat= 86;
-        if (forCAD){
+        if (myAstrolabe.getLaserSupport()){
             highestLat = 85;
         }
         double y = myAstrolabe.getUniversalLimbRadius()/Math.sin(Math.toRadians(highestLat));
@@ -134,7 +134,7 @@ public class UniversalPrintEngine {
 
         int interval = 2;
         int limit = 44;
-        if (forCAD){
+        if (myAstrolabe.getLaserSupport()){
             interval = 5;
             limit = 17;
         }
@@ -152,7 +152,7 @@ public class UniversalPrintEngine {
 
             out += "\n" + "newpath";
 
-            if (forCAD){
+            if (myAstrolabe.getLaserSupport()){
                 out += "\n" + "0 " + y + " " + r + " " + angle11 + " " + angle12 + " arc stroke";
                 if (!isRete) {
                     out += "\n" + "0 -" + y + " " + r + " " + angle21 + " " + angle22 + " arc stroke";
@@ -284,9 +284,9 @@ public class UniversalPrintEngine {
             out += "\n" + "0 setgray";
         }
 
-        out += "\n" + "";
+        out += "\n";
         out += "\n" + "%% ==================== End Build Saphea ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -299,7 +299,7 @@ public class UniversalPrintEngine {
      */
     private String drawLimbScale(){
         int count;
-        Double rotationIncrement;
+        double rotationIncrement;
         String out = "";
 
         // show the front degree scale
@@ -336,8 +336,8 @@ public class UniversalPrintEngine {
         int count;
 
         // Label the degree scale
-        Double labelRadius;
-        Double fontSize;
+        double labelRadius;
+        double fontSize;
 
         labelRadius =(myAstrolabe.getUniversalLimbRadius() + 10);
         fontSize = 8.0;
@@ -356,7 +356,6 @@ public class UniversalPrintEngine {
 
     /**
      * Draws the limb of the Astrolabe and labels it
-     *
      * since   0.1
      *
      */
@@ -372,7 +371,7 @@ public class UniversalPrintEngine {
         out += labelLimbScale();
 
         out += "\n" + "%% ==================== End Create Mater Limb ====================";
-        out += "\n" + "";
+        out += "\n";
 
         return out;
     }
@@ -400,13 +399,13 @@ public class UniversalPrintEngine {
 
         out += "\n" + "306 396 translate";
         out += "\n" + ".4 setlinewidth";
-        out += "\n" + "";
+        out += "\n";
 
         // Draw the Saphea
         out += "\n" + "gsave";
         out += buildSaphea(true);
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         // Draw edge and diameters
         out += buildPlate();
@@ -428,7 +427,7 @@ public class UniversalPrintEngine {
         out += "\n" + "%% setup";
         out += "\n" + "306 250 translate";
         out += "\n" + ".4 setlinewidth";
-        out += "\n" + "";
+        out += "\n";
         out += EPSToolKit.setUpFonts();
 
         // Draw the Regula
@@ -436,7 +435,7 @@ public class UniversalPrintEngine {
         double regulaLength = myAstrolabe.getUniversalLimbRadius();
 
         out += "\n" + "%% ==================== Create Regula ====================";
-        out += "\n" + "";
+        out += "\n";
 
         // draw rule
         out += "\n" + "newpath";
@@ -453,7 +452,7 @@ public class UniversalPrintEngine {
         out += "\n" + regulaLength + " -20 moveto";
         out += "\n" + "0 -20 lineto stroke";
 
-        out += "\n" + "";
+        out += "\n";
 
         // draw rule pivot
         out += "\n" + "%% Mark pivot";
@@ -468,7 +467,7 @@ public class UniversalPrintEngine {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         //mark
         out += "\n" + "newpath";
@@ -576,7 +575,7 @@ public class UniversalPrintEngine {
         out += "\n" + "-25 -5 lineto";
         out += "\n" + "-5 -15 lineto";
         out += "\n" + "0 -15 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         //second section
         out += "\n" + "0 75 translate";
@@ -636,7 +635,7 @@ public class UniversalPrintEngine {
 
         out += "\n" + "306 396 translate";
         out += "\n" + ".4 setlinewidth";
-        out += "\n" + "";
+        out += "\n";
         out += EPSToolKit.setUpFonts();
         out += EPSToolKit.setUpCircularText();
 
@@ -650,7 +649,7 @@ public class UniversalPrintEngine {
                 out += "\n" + "0 0 " + (myAstrolabe.getMaterRadius()) + " 0 360 arc fill";
             }
             out += "\n" + "grestore";
-            out += "\n" + "";
+            out += "\n";
         }
 
         if (myAstrolabe.getShapeOption() == 1){
@@ -663,19 +662,19 @@ public class UniversalPrintEngine {
         out += "\n" + "gsave";
         out += buildSaphea(false);
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         // Build the limb
         out += "\n" + "gsave";
         out += buildMaterLimb();
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         // Build the plate
         out += "\n" + "gsave";
         out += buildPlate();
         out += "\n" + "grestore";
-        out += "\n" + "";
+        out += "\n";
 
         // mark pivot point
         out += "\n" + "%% Mark pivot";
@@ -689,7 +688,7 @@ public class UniversalPrintEngine {
         out += "\n" + "newpath";
         out += "\n" + "0 5 moveto";
         out += "\n" + "0 -5 lineto stroke";
-        out += "\n" + "";
+        out += "\n";
 
         // Write Footer
         out += "\n" + "% Eject the page";
