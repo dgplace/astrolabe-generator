@@ -96,6 +96,7 @@ public class Astrolabe {
     private boolean concentricCalendar;         // use the concentric calendar
     private int frontPrintOption;				// 0 print both, 1 print Mater only, 2 print Climate only
     private boolean showHorizonPlate;         	// show horizon plate
+    private boolean laserSupport;         	    // output files for laser or AD
     private boolean showLunarMansions;        	// show lunar mansions
     private boolean showEquationOfTime;         // show Equation of Time scale
 
@@ -369,8 +370,16 @@ public class Astrolabe {
         return showHorizonPlate;
     }
 
-    public void setShowHorizonPlate(boolean showHorizonPlate) {
-        this.showHorizonPlate = showHorizonPlate;
+    public void setShowHorizonPlate(boolean laserSupport) {
+        this.laserSupport = laserSupport;
+    }
+
+    public boolean getLaserSupport() {
+        return laserSupport;
+    }
+
+    public void setLaserSupport(boolean laserSupport) {
+        this.laserSupport = laserSupport;
     }
 
     public boolean getShowLunarMansions() {
@@ -619,6 +628,7 @@ public class Astrolabe {
         this.showEquationOfTime = false;
         this.frontPrintOption = 0; // default to printing both
         this.showHorizonPlate = false;
+        this.laserSupport = false;
 
         this.reteType = 0;
 

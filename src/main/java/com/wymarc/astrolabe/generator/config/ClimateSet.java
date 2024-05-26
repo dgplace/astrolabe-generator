@@ -33,7 +33,7 @@ public class ClimateSet {
     public String getLocationNames(){
         String result = "";
         for (ClimatePlate plate : climates){
-            if (result.equals("")){
+            if (result.isEmpty()){
                 result = plate.getName();
             }else{
                 result = result + ", " + plate.getName();

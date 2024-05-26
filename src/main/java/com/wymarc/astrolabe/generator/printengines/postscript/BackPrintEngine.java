@@ -31,8 +31,7 @@ import java.util.ArrayList;
 public class BackPrintEngine {
 
     private Astrolabe myAstrolabe = new Astrolabe();
-    private boolean isLaser = true;
-
+    
     /**
      * Builds the default offset calendar ring
      *
@@ -55,7 +54,7 @@ public class BackPrintEngine {
         t = AstroMath.getT();
         lineOfApsides = AstroMath.angleOfLineOfApsides(t);
         out += "\n" + -lineOfApsides + " rotate";// rotate to line up line of apsides with 0 degrees
-        if (!isLaser) {
+        if (!myAstrolabe.getLaserSupport()) {
             out += "\n" + "%% draw Line of Apsides";
             //out += "\n" + ".4 setlinewidth";
             out += "\n" + "newpath";
@@ -72,7 +71,7 @@ public class BackPrintEngine {
         out += "\n" + -delta + " 0 translate"; // center on calendar center
 
         //step 3 draw the ring outlines
-        if (!isLaser) {
+        if (!myAstrolabe.getLaserSupport()) {
             out += "\n" + "1 setgray";
             out += "\n" + "0 0 " + (calendarRadius) + " 0 360 arc fill"; //use fill to remove hidden parts of line of apsides
         }
@@ -256,7 +255,7 @@ public class BackPrintEngine {
         StringBuilder out = new StringBuilder();
 
         out.append("\n").append("%% ================ Draw Unequal Hours =================");
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 0 1 setrgbcolor");
         }
 
@@ -311,13 +310,13 @@ public class BackPrintEngine {
             }
         }
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 setgray");
         }
 
         if ((myAstrolabe.getTopLeft() == 1 || myAstrolabe.getTopLeft() == 3) && myAstrolabe.getTopRight() == 1){
             //both first and second quadrants unequal hours
-            if (isLaser) {
+            if (myAstrolabe.getLaserSupport()) {
                 out.append("\n").append("ArialFont5 setfont");
             } else {
                 out.append("\n").append("NormalFont5 setfont");
@@ -326,7 +325,7 @@ public class BackPrintEngine {
                 out.append("\n").append(EPSToolKit.drawOutsideCircularText(Integer.toString(i), 5, (180 - (i*15)), unequalRadius +2));
             }
         }else if(myAstrolabe.getTopLeft() == 1 || myAstrolabe.getTopLeft() == 3){
-            if (isLaser) {
+            if (myAstrolabe.getLaserSupport()) {
                 out.append("\n").append("ArialFont5 setfont");
             } else {
                 out.append("\n").append("NormalFont5 setfont");
@@ -335,7 +334,7 @@ public class BackPrintEngine {
                 out.append("\n").append(EPSToolKit.drawOutsideCircularText(Integer.toString(7-i), 5, (90+((i-1)*15)), unequalRadius +2));
             }
         }else if(myAstrolabe.getTopRight() == 1){
-            if (isLaser) {
+            if (myAstrolabe.getLaserSupport()) {
                 out.append("\n").append("ArialFont5 setfont");
             } else {
                 out.append("\n").append("NormalFont5 setfont");
@@ -384,14 +383,14 @@ public class BackPrintEngine {
             //out += "\n" + "NormalFont5 setfont";
             //out = drawInsideCircularText(out, i.toString(), 5, 0, (cotangentRadius + 10));
             if(i <= 12 || i == 14 || i == 16 || i == 18 || i == 21){
-                if (isLaser) {
+                if (myAstrolabe.getLaserSupport()) {
                     out += "\n" + "0 setgray";
                     out += "\n" + "ArialFont5 setfont";
                 } else{
                     out += "\n" + "NormalFont5 setfont";
                 }
                 out += EPSToolKit.drawInsideCircularText(Integer.toString(i), 5, 0, (cotangentRadius + 10));
-                if (isLaser) {
+                if (myAstrolabe.getLaserSupport()) {
                     out += "\n" + "0 0 1 setrgbcolor";
                 }
             }
@@ -406,14 +405,14 @@ public class BackPrintEngine {
             out += "\n" + (cotangentRadius + 7) + " 0 lineto stroke";
             if(i <= 10 || i == 12 || i == 14 || i == 16 || i == 18 || i == 20 || i == 24 || i == 28 || i == 32){
                 out += "\n" + "NormalFont5 setfont";
-                if (isLaser) {
+                if (myAstrolabe.getLaserSupport()) {
                     out += "\n" + "0 setgray";
                     out += "\n" + "ArialFont5 setfont";
                 } else{
                     out += "\n" + "NormalFont5 setfont";
                 }
                 out += EPSToolKit.drawInsideCircularText(Integer.toString(i), 5, 0, (cotangentRadius + 10));
-                if (isLaser) {
+                if (myAstrolabe.getLaserSupport()) {
                     out += "\n" + "0 0 1 setrgbcolor";
                 }
             }
@@ -451,7 +450,7 @@ public class BackPrintEngine {
         double div = 0.0;
         StringBuilder out = new StringBuilder();
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 0 1 setrgbcolor");
         }
 
@@ -515,11 +514,11 @@ public class BackPrintEngine {
                     .append("\n").append("0 0 moveto")
                     .append("\n").append(shadowSide).append(" ").append(-shadowSide).append(" lineto stroke");
 
-            if (isLaser) {
+            if (myAstrolabe.getLaserSupport()) {
                 out.append("\n").append("0 setgray");
             }
             //Mark degrees
-            if (isLaser) {
+            if (myAstrolabe.getLaserSupport()) {
                 out.append("\n").append("ArialFont5 setfont");
             } else {
                 out.append("\n").append("NormalFont5 setfont");
@@ -544,7 +543,7 @@ public class BackPrintEngine {
             out.append("\n").append("(").append(Math.round(div)).append(") show");
 
             // Label
-            if (isLaser) {
+            if (myAstrolabe.getLaserSupport()) {
                 out.append("\n").append("ArialFont8 setfont");
             } else {
                 out.append("\n").append("NormalFont8 setfont");
@@ -559,7 +558,7 @@ public class BackPrintEngine {
             out.append("\n").append("% =============== End Right Shadow Square =================");
 
             if((myAstrolabe.getBottomLeft() == 1)||(myAstrolabe.getBottomLeft() == 2)||(myAstrolabe.getBottomLeft() == 3)){
-                if (isLaser){
+                if (myAstrolabe.getLaserSupport()){
                     out.append("\n").append("0 0 1 setrgbcolor");
                 }
                 out.append("\n").append("% Shadow square")
@@ -620,12 +619,12 @@ public class BackPrintEngine {
                         .append("\n").append("0 0 moveto")
                         .append("\n").append(-shadowSide).append(" ").append(-shadowSide).append(" lineto stroke");
 
-                if (isLaser) {
+                if (myAstrolabe.getLaserSupport()) {
                     out.append("\n").append("0 setgray");
                 }
 
                 //Mark degrees
-                if (isLaser) {
+                if (myAstrolabe.getLaserSupport()) {
                     out.append("\n").append("ArialFont5 setfont");
                 } else {
                     out.append("\n").append("NormalFont5 setfont");
@@ -650,7 +649,7 @@ public class BackPrintEngine {
                 out.append("\n").append("(").append(Math.round(div)).append(") show");
 
                 // Label
-                if (isLaser) {
+                if (myAstrolabe.getLaserSupport()) {
                     out.append("\n").append("ArialFont8 setfont");
                 } else {
                     out.append("\n").append("NormalFont8 setfont");
@@ -694,11 +693,11 @@ public class BackPrintEngine {
                 out.append("\n").append(-count * 7).append(" -28 lineto stroke");
             }
 
-            if (isLaser) {
+            if (myAstrolabe.getLaserSupport()) {
                 out.append("\n").append("0 setgray");
             }
 
-            if (isLaser) {
+            if (myAstrolabe.getLaserSupport()) {
                 out.append("\n").append("ArialFont5 setfont");
             } else {
                 out.append("\n").append("NormalFont5 setfont");
@@ -715,7 +714,7 @@ public class BackPrintEngine {
         if(myAstrolabe.getBottomRight() == 4){
             //Draw bottom right horz shadow scale
             out.append("\n").append("% =============== Create Right Horz Shadow scale =================");
-            if (isLaser){
+            if (myAstrolabe.getLaserSupport()){
                 out.append("\n").append("0 0 1 setrgbcolor");
             }
             // draw box
@@ -742,7 +741,7 @@ public class BackPrintEngine {
                 out.append("\n").append(count * 7).append(" -28 lineto stroke");
             }
 
-            if (isLaser) {
+            if (myAstrolabe.getLaserSupport()) {
                 out.append("\n").append("ArialFont5 setfont");
             } else {
                 out.append("\n").append("NormalFont5 setfont");
@@ -757,7 +756,7 @@ public class BackPrintEngine {
         }
 
         // Draw centerline
-        if (isLaser) {
+        if (myAstrolabe.getLaserSupport()) {
             out.append("\n").append("0 0 1 setrgbcolor");
         }
         if (myAstrolabe.getBottomRight() != 0 && myAstrolabe.getBottomRight() != 4 &
@@ -1050,7 +1049,7 @@ public class BackPrintEngine {
 
         ArrayList<Point2D> points = AstroMath.equationOfTimePoints(innerRadius, outerRadius);
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 0 1 setrgbcolor");
         }
         out.append("\n").append("newpath");
@@ -1085,7 +1084,7 @@ public class BackPrintEngine {
                 out.append("\n").append(EPSToolKit.centerText(i+""));
                 out.append("\n").append(-(r)).append(" 0  moveto");
                 out.append("\n").append(EPSToolKit.centerText(i+""));
-                if (isLaser){
+                if (myAstrolabe.getLaserSupport()){
                     out.append("\n").append("0 0 1 setrgbcolor");
                 }
             }
@@ -1121,7 +1120,7 @@ public class BackPrintEngine {
         out += EPSToolKit.setUpCircularText();
 
         if (myAstrolabe.getShowThrone()){
-            if (isLaser){
+            if (myAstrolabe.getLaserSupport()){
                 out += "\n" + "1 0 0 setrgbcolor";
             }
             out += "\n" + "gsave";
@@ -1132,7 +1131,7 @@ public class BackPrintEngine {
             }
             out += "\n" + "grestore";
             out += "\n";
-            if (isLaser){
+            if (myAstrolabe.getLaserSupport()){
                 out += "\n" + "gsave";
                 out += "\n" + "1 0 0 setrgbcolor";
                 out += EPSToolKit.buildScrewMount(myAstrolabe);
@@ -1210,7 +1209,7 @@ public class BackPrintEngine {
         // mark pivot point
         out += "\n" + "%% Mark pivot";
         out += "\n" + "newpath";
-        if (!isLaser){
+        if (!myAstrolabe.getLaserSupport()){
             out += "\n" + "1 setgray";
             out += "\n" + "0 0 5 0 360 arc fill";
             out += "\n" + "0 setgray";
@@ -1218,7 +1217,7 @@ public class BackPrintEngine {
             out += "\n" + "1 0 0 setrgbcolor";
         }
         out += "\n" + "0 0 5 0 360 arc stroke";
-        if (!isLaser){
+        if (!myAstrolabe.getLaserSupport()){
             out += "\n" + "newpath";
             out += "\n" + "-5 0 moveto";
             out += "\n" + "5 0 lineto stroke";

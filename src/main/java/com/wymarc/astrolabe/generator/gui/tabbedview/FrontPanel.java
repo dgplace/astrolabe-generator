@@ -44,6 +44,7 @@ public class FrontPanel extends JPanel implements ActionListener,MouseListener {
     private JCheckBox allTwilightLinesCheck = null;
     private JCheckBox horizonPlateCheck = null;
     private JCheckBox housesOfHeavenCheck = null;
+    private JCheckBox laserSupportCheck = null;
     private ThumbNail thumbNail = null;
 
     public FrontPanel() {
@@ -118,6 +119,10 @@ public class FrontPanel extends JPanel implements ActionListener,MouseListener {
         optionsPanel.add( new JSeparator(JSeparator.HORIZONTAL),c);
         c.gridy++;
         optionsPanel.add(getHorizonPlateCheck(),c);
+        c.gridy++;
+        optionsPanel.add( new JSeparator(JSeparator.HORIZONTAL),c);
+        c.gridy++;
+        optionsPanel.add(getLaserCheck(),c);
 
         leftPanel.add(optionsPanel,BorderLayout.NORTH);
         add(leftPanel,BorderLayout.WEST);
@@ -276,6 +281,18 @@ public class FrontPanel extends JPanel implements ActionListener,MouseListener {
         return horizonPlateCheck;
     }
 
+    private JCheckBox getLaserCheck(){
+        if (null == laserSupportCheck){
+            laserSupportCheck = new JCheckBox("Output files for CAD/laser cutter");
+            laserSupportCheck.setSelected(GeneratorGui.MY_ASTROLABE.getLaserSupport());
+            laserSupportCheck.setToolTipText("Output files for laser cutting or CAD instead of printing");
+            laserSupportCheck.setActionCommand("Print_Laser");
+            laserSupportCheck.addActionListener(this);
+            laserSupportCheck.addMouseListener(this);
+        }
+        return laserSupportCheck;
+    }
+
     private JCheckBox getHousesOfHeavenCheck(){
         if (null == housesOfHeavenCheck){
             housesOfHeavenCheck = new JCheckBox("Show houses of heaven");
@@ -301,6 +318,7 @@ public class FrontPanel extends JPanel implements ActionListener,MouseListener {
         getTwilightLinesCheck().setSelected(GeneratorGui.MY_ASTROLABE.getShowTwilightLines());
         getAllTwilightLinesCheck().setSelected(GeneratorGui.MY_ASTROLABE.getShowAllTwilightLines());
         getHorizonPlateCheck().setSelected(GeneratorGui.MY_ASTROLABE.getShowHorizonPlate());
+        getLaserCheck().setSelected(GeneratorGui.MY_ASTROLABE.getLaserSupport());
         getHousesOfHeavenCheck().setSelected(GeneratorGui.MY_ASTROLABE.getShowHousesofHeavenLines());
         getThumbNail().updateUI();
     }
@@ -416,6 +434,10 @@ public class FrontPanel extends JPanel implements ActionListener,MouseListener {
         if (cmd.equals("Show_Houses")) {
             GeneratorGui.MY_ASTROLABE.setShowHousesofHeavenLines(getHousesOfHeavenCheck().isSelected());
             getThumbNail().updateUI();
+        }
+
+        if (cmd.equals("Print_Laser")) {
+            GeneratorGui.MY_ASTROLABE.setLaserSupport(getLaserCheck().isSelected());
         }
 
     }

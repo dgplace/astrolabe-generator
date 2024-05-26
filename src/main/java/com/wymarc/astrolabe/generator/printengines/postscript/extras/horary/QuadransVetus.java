@@ -18,12 +18,12 @@ import java.util.Calendar;
 
 public class QuadransVetus {
 
-    private boolean isLaser = true;
+    private Astrolabe myAstrolabe = new Astrolabe();
 
     private String drawOutline() {
         StringBuilder out = new StringBuilder();
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("1 0 0 setrgbcolor");
         }
 
@@ -37,7 +37,7 @@ public class QuadransVetus {
                 .append("\n").append("540 0 lineto")
                 .append("\n").append("0 0 lineto stroke");
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 0 1 setrgbcolor");
         }
 
@@ -48,7 +48,7 @@ public class QuadransVetus {
                 .append("\n").append("36 -36 499 270 360 arc")
                 .append("\n").append("36 -36 lineto stroke");
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 setgray");
         }
 
@@ -59,7 +59,7 @@ public class QuadransVetus {
     private String drawDegreeScale() {
         StringBuilder out = new StringBuilder();
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 0 1 setrgbcolor");
         }
 
@@ -84,12 +84,12 @@ public class QuadransVetus {
         }
         out.append("\n").append("89 rotate");
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 setgray");
         }
 
         //Mark degrees
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("ArialFont16 setfont");
         }else{
             out.append("\n").append("NormalFont16 setfont");
@@ -105,7 +105,7 @@ public class QuadransVetus {
     private String drawTick(double alt, int start, int end, String text) {
         StringBuilder out = new StringBuilder();
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 0 1 setrgbcolor");
         }
 
@@ -114,12 +114,12 @@ public class QuadransVetus {
                 .append("\n").append("0 ").append(end).append(" lineto stroke")
                 .append("\n").append(-alt).append(" rotate");
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 setgray");
         }
 
         if (!text.equals("")) {
-            if (isLaser){
+            if (myAstrolabe.getLaserSupport()){
                 out.append("\n").append("ArialFont10 setfont");
             }else{
                 out.append("\n").append("NormalFont10 setfont");
@@ -135,7 +135,7 @@ public class QuadransVetus {
 
     private String drawCalendarScale(double lat) {
         StringBuilder out = new StringBuilder();
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 0 1 setrgbcolor");
         }
 
@@ -145,7 +145,7 @@ public class QuadransVetus {
                 .append("\n").append("0 0 365 270 360 arc stroke")
                 .append("\n");
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 setgray");
         }
 
@@ -165,7 +165,7 @@ public class QuadransVetus {
         out.append(drawTick(alt - 176, 370, 455, ""));
         double highAngle = (alt + 3) + 270;
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 0 1 setrgbcolor");
         }
 
@@ -181,7 +181,7 @@ public class QuadransVetus {
 //                .append("\n").append("0 0 435 ").append(lowAngle).append(" ").append(highAngle).append(" arc stroke")
 //                .append("\n").append("0 0 455 ").append(lowAngle - 1).append(" ").append(highAngle + 1).append(" arc stroke");
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 setgray");
         }
 
@@ -387,7 +387,7 @@ public class QuadransVetus {
         double div = 12.0;
         StringBuilder out = new StringBuilder();
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 0 1 setrgbcolor");
         }
 
@@ -434,7 +434,7 @@ public class QuadransVetus {
                 .append("\n").append("0 0 moveto")
                 .append("\n").append(shadowSide).append(" ").append(-shadowSide).append(" lineto stroke");
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 setgray");
         }
 
@@ -445,7 +445,7 @@ public class QuadransVetus {
         double twelve = Math.tan(Math.toRadians(37.5)) * (shadowSide - 10);
 
         //Mark degrees
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("ArialFont12 setfont");
         }else{
             out.append("\n").append("NormalFont12 setfont");
@@ -481,7 +481,7 @@ public class QuadransVetus {
         // draw arcs
         out.append("\n").append("% unequal hours");
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 0 1 setrgbcolor");
         }
 
@@ -493,13 +493,13 @@ public class QuadransVetus {
             out.append("\n").append(radius).append(" 0 ").append(radius).append(" 180 ").append(angle2).append(" arc stroke");
         }
 
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("0 setgray");
         }
 
         //Mark unequal hours
         //Mark degrees
-        if (isLaser){
+        if (myAstrolabe.getLaserSupport()){
             out.append("\n").append("ArialFont12 setfont");
         }else{
             out.append("\n").append("NormalFont12 setfont");

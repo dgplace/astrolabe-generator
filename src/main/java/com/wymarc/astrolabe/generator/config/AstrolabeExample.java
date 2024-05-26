@@ -51,6 +51,7 @@ public class AstrolabeExample {
     private boolean showCotangent;
     private boolean concentricCalendar;
     private boolean showEot;
+    private boolean laserSupport;
 
     public String getName() {
         return name;
@@ -298,6 +299,14 @@ public class AstrolabeExample {
 
     public void setShowEot(boolean showEot) {
         this.showEot = showEot;
+    }
+
+    public boolean isLaserSupport() {
+        return laserSupport;
+    }
+
+    public void setLaserSupport(boolean laserSupport) {
+        this.laserSupport = laserSupport;
     }
 }
 
