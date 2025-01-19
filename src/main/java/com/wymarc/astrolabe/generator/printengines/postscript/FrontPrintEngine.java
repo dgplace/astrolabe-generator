@@ -172,9 +172,16 @@ public class FrontPrintEngine {
                 while (count <= 3){
                     altitude = -6 * count;
                     //Compute center
-                    center = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(myAstrolabe.getLocation().getLatitude())) / (Math.sin(Math.toRadians(myAstrolabe.getLocation().getLatitude())) + Math.sin(Math.toRadians(altitude))));
+//                    center = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(myAstrolabe.getLocation().getLatitude())) / (Math.sin(Math.toRadians(myAstrolabe.getLocation().getLatitude())) + Math.sin(Math.toRadians(altitude))));
+//                    //compute radius
+//                    radius = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(altitude)) / (Math.sin(Math.toRadians(myAstrolabe.getLocation().getLatitude())) + Math.sin(Math.toRadians(altitude))));
+//                    center = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) / (Math.sin(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) + Math.sin(Math.toRadians(altitude))));
+//                    //compute radius
+//                    radius = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(altitude)) / (Math.sin(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) + Math.sin(Math.toRadians(altitude))));
+                    center = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) / (Math.sin(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) + Math.sin(Math.toRadians(altitude))));
                     //compute radius
-                    radius = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(altitude)) / (Math.sin(Math.toRadians(myAstrolabe.getLocation().getLatitude())) + Math.sin(Math.toRadians(altitude))));
+                    radius = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(altitude)) / (Math.sin(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) + Math.sin(Math.toRadians(altitude))));
+
                     //compute clipping
                     InterSect myInterSect = new InterSect(0, center, radius, 0, 0, myAstrolabe.getCancerRadius());
                     if (myInterSect.getIntersection()){
@@ -191,9 +198,15 @@ public class FrontPrintEngine {
                 // compute and draw just the 18 degree twilight line
                 altitude = -18;
                 //Compute center
+//                center = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) / (Math.sin(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) + Math.sin(Math.toRadians(altitude))));
+//                //compute radius
+//                radius = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(altitude)) / (Math.sin(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) + Math.sin(Math.toRadians(altitude))));
+
                 center = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) / (Math.sin(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) + Math.sin(Math.toRadians(altitude))));
                 //compute radius
                 radius = myAstrolabe.getEquatorRadius() * (Math.cos(Math.toRadians(altitude)) / (Math.sin(Math.toRadians(Math.abs(myAstrolabe.getLocation().getLatitude()))) + Math.sin(Math.toRadians(altitude))));
+
+
                 //compute clipping
                 InterSect myInterSect = new InterSect(0, center, radius, 0, 0, myAstrolabe.getCancerRadius());
                 if (myInterSect.getIntersection()){
