@@ -33,9 +33,12 @@
           <resource>
             <directory>src/main/resources</directory>
             <filtering>true</filtering>
+            <excludes>
+              <exclude>com/wymarc/astrolabe/generator/reference/Astrolabe_assembly.pdf</exclude>
+            </excludes>
           </resource>
         </resources>
-				<plugins>
+                                <plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-compiler-plugin</artifactId>
@@ -72,6 +75,9 @@
           <resource>
             <directory>src/main/resources</directory>
             <filtering>true</filtering>
+            <excludes>
+              <exclude>com/wymarc/astrolabe/generator/reference/Astrolabe_assembly.pdf</exclude>
+            </excludes>
           </resource>
         </resources>
 				<plugins>
