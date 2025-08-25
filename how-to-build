@@ -1,0 +1,2 @@
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home
+mvn clean package -Dmaven.compiler.source=8 -Dmaven.compiler.target=8
