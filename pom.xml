@@ -33,6 +33,9 @@
           <resource>
             <directory>src/main/resources</directory>
             <filtering>true</filtering>
+            <excludes>
+              <exclude>com/wymarc/astrolabe/generator/reference/Astrolabe_assembly.pdf</exclude>
+            </excludes>
           </resource>
         </resources>
 				<plugins>
@@ -72,6 +75,9 @@
           <resource>
             <directory>src/main/resources</directory>
             <filtering>true</filtering>
+            <excludes>
+              <exclude>com/wymarc/astrolabe/generator/reference/Astrolabe_assembly.pdf</exclude>
+            </excludes>
           </resource>
         </resources>
 				<plugins>
